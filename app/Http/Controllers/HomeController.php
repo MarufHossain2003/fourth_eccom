@@ -20,4 +20,14 @@ class HomeController extends Controller
     {
         return view ('frontend.home.return-process');
     }
+
+    public function checkOut()
+    {
+        return view ('frontend.home.checkout');
+    }
+
+    public function productDetails()
+    {
+        return view ('frontend.home.product-details');
+    }
 }
