@@ -50,8 +50,8 @@
 									</h4>
 								</div>
 								<div class="shopping-cart-button">
-									<a href="view-products.html" class="view-cart-link">View cart</a>
-									<a href="checkout.html" class="checkout-link">Checkout</a>
+									<a href="{{url('/product-details')}}" class="view-cart-link">View cart</a>
+									<a href="{{url('/checkout')}}" class="checkout-link">Checkout</a>
 								</div>
 							</div>
 						</div>
