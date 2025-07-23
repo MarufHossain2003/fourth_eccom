@@ -28,11 +28,22 @@ class CategoryController extends Controller
                 $category->slug = Str::slug($request->name);
                 if(isset($request->image)){
                     $imageName = rand().'-category-'.'.'.$request->image->extension();
-                    $request->imae->move('backend/images/category/', $imageName);
+                    $request->image->move('backend/images/category/', $imageName);
                     $category->image = $imageName;
                 }
                 $category->save();
                 return redirect()->back();
+            }
+        }
+    }
+
+    public function listCategory()
+    {
+        if(Auth::user()){
+            if(Auth::user()->role == 1){
+                $categories = Category::get();
+                // dd($categories);
+                return view('backend.admin.category.list', compact('categories'));
             }
         }
     }

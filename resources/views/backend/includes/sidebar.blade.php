@@ -24,7 +24,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/examples/invoice.html" class="nav-link">
+                <a href="{{url('/admin/category/list')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Category List</p>
                 </a>

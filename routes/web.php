@@ -29,5 +29,6 @@ Route::post('/login-check',                 [AdminController::class, 'loginAcces
 Route::get('/dashboard',                    [AdminController::class, 'adminDashboard']);
 
 // Category Routes
+Route::get('/admin/category/list',           [CategoryController::class, 'listCategory']);
 Route::get('/admin/category/create',         [CategoryController::class, 'createCategory']);
 Route::post('/admin/category/store',         [CategoryController::class, 'storeCategory']);
