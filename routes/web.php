@@ -32,3 +32,4 @@ Route::get('/dashboard',                    [AdminController::class, 'adminDashb
 Route::get('/admin/category/list',           [CategoryController::class, 'listCategory']);
 Route::get('/admin/category/create',         [CategoryController::class, 'createCategory']);
 Route::post('/admin/category/store',         [CategoryController::class, 'storeCategory']);
+Route::get('/admin/category/delete/{id}',    [CategoryController::class, 'deleteCategory']);

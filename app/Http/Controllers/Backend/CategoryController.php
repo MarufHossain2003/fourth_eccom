@@ -47,4 +47,19 @@ class CategoryController extends Controller
             }
         }
     }
+
+    public function deleteCategory($id)
+    {
+        if(Auth::user()){
+            if(Auth::user()->role == 1){
+                $category = Category::find($id);
+                // dd($category);
+                if($category->image && file_exists('backend/images/category/'.$category->image)){
+                    unlink('backend/images/category/'.$category->image);
+                }
+                $category->delete();
+                return redirect()->back()->with('success', 'Category deleted successfully');
+            }
+        }
+    }
 }

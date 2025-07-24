@@ -3,30 +3,34 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">DataTable with default features</h3>
+                <h3 class="card-title">Category List</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>Rendering engine</th>
-                            <th>Browser</th>
-                            <th>Platform(s)</th>
-                            <th>Engine version</th>
-                            <th>CSS grade</th>
+                            <th>Sl</th>
+                            <th>Image</th>
+                            <th>Category Name</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Trident</td>
-                            <td>Internet
-                                Explorer 4.0
-                            </td>
-                            <td>Win 95+</td>
-                            <td> 4</td>
-                            <td>X</td>
-                        </tr>
+                        @foreach ($categories as $category)
+                            <tr>
+                                <td>{{$loop->index+1}}</td>
+                                <td>
+                                    <img src="{{asset('backend/images/category/'. $category->image)}}" alt="Category Image" class="img-fluid"
+                                        style="width: 100px; height: 100px;">
+                                </td>
+                                <td>{{$category->name}}</td>
+                                <td>
+                                    <a href="" class="btn btn-primary">Edit</a>
+                                    <a href="{{url('/admin/category/delete/'.$category->id)}}" onclick="return confirm('Are you sure?')" class="btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
