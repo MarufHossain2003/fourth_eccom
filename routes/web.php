@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,3 +35,13 @@ Route::get('/admin/category/list',           [CategoryController::class, 'listCa
 Route::get('/admin/category/create',         [CategoryController::class, 'createCategory']);
 Route::post('/admin/category/store',         [CategoryController::class, 'storeCategory']);
 Route::get('/admin/category/delete/{id}',    [CategoryController::class, 'deleteCategory']);
+Route::get('/admin/category/edit/{id}',      [CategoryController::class, 'editCategory']);
+Route::post('/admin/category/update/{id}',   [CategoryController::class, 'updateCategory']);
+
+// Sub Category Routes
+Route::get('/admin/sub-category/list',              [SubCategoryController::class, 'listCategory']);
+Route::get('/admin/sub-category/create',            [SubCategoryController::class, 'createCategory']);
+Route::post('/admin/sub-category/store',            [SubCategoryController::class, 'storeCategory']);
+Route::get('/admin/sub-category/delete/{id}',       [SubCategoryController::class, 'deleteCategory']);
+Route::get('/admin/sub-category/edit/{id}',         [SubCategoryController::class, 'editCategory']);
+Route::post('/admin/sub-category/update/{id}',      [SubCategoryController::class, 'updateCategory']);
