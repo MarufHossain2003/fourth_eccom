@@ -39,9 +39,9 @@ Route::get('/admin/category/edit/{id}',      [CategoryController::class, 'editCa
 Route::post('/admin/category/update/{id}',   [CategoryController::class, 'updateCategory']);
 
 // Sub Category Routes
-Route::get('/admin/sub-category/list',              [SubCategoryController::class, 'listCategory']);
-Route::get('/admin/sub-category/create',            [SubCategoryController::class, 'createCategory']);
-Route::post('/admin/sub-category/store',            [SubCategoryController::class, 'storeCategory']);
-Route::get('/admin/sub-category/delete/{id}',       [SubCategoryController::class, 'deleteCategory']);
-Route::get('/admin/sub-category/edit/{id}',         [SubCategoryController::class, 'editCategory']);
-Route::post('/admin/sub-category/update/{id}',      [SubCategoryController::class, 'updateCategory']);
+Route::get('/admin/sub-category/list',              [SubCategoryController::class, 'listSubCategory']);
+Route::get('/admin/sub-category/create',            [SubCategoryController::class, 'createSubCategory']);
+Route::post('/admin/sub-category/store',            [SubCategoryController::class, 'storeSubCategory']);
+Route::get('/admin/sub-category/delete/{id}',       [SubCategoryController::class, 'deleteSubCategory']);
+Route::get('/admin/sub-category/edit/{id}',         [SubCategoryController::class, 'editSubCategory']);
+Route::post('/admin/sub-category/update/{id}',      [SubCategoryController::class, 'updateSubCategory']);
