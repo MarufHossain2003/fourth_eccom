@@ -15,7 +15,8 @@ class SubCategoryController extends Controller
     {
         if (Auth::user()) {
             if (Auth::user()->role == 1) {
-                $subCategories = SubCategory::get();
+                $subCategories = SubCategory::with('category')->get();
+                // dd($subCategories);
                 return view('backend.admin.subcategory.list', compact('subCategories'));
             }
         }
@@ -43,6 +44,17 @@ class SubCategoryController extends Controller
                 $subCategory->save();
                 toastr()->success('Sub-Category created successfully!');
                 return redirect('/admin/sub-category/list');
+            }
+        }
+    }
+
+    public function editSubCategory($id)
+    {
+        if (Auth::user()) {
+            if (Auth::user()->role == 1) {
+                $subCategory = SubCategory::find($id);
+                $categories = Category::get();
+                return view ('backend.admin.subcategory.edit', compact('subCategory', 'categories'));
             }
         }
     }
