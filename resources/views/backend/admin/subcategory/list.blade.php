@@ -11,7 +11,7 @@
                     <thead>
                         <tr>
                             <th>Sl</th>
-                            <th>Category Name</th>
+                            <th>Sub-Category Name</th>
                             <th>Category</th>
                             <th>Action</th>
                         </tr>
@@ -21,11 +21,12 @@
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $subCategory->name }}</td>
-                                <td>{{$subCategory->category->name}}</td>
+                                <td>{{ $subCategory->category->name ?? 'No category' }}</td>
+
                                 <td>
                                     <a href="{{ url('/admin/sub-category/edit/' . $subCategory->id) }}"
                                         class="btn btn-primary">Edit</a>
-                                    <a href="{{ url('/admin/sub-category/update/' . $subCategory->id) }}"
+                                    <a href="{{ url('admin/sub-category/delete/' . $subCategory->id) }}"
                                         onclick="return confirm('Are you sure?')" class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
