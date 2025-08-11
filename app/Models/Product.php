@@ -20,7 +20,13 @@ class Product extends Model
     {
         return $this->belongsTo(SubCategory::class, 'sub_cat_id', 'id');
     }
+
+    public function color()
+    {
+        return $this->hasMany(Color::class, 'product_id', 'id');
+    }
 }
 
 // Product belongs to a category
 // Product bolongs to subCategories
+// Product has many colors
