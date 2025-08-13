@@ -40,6 +40,11 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label for="color">Product Color(optional)</label>
+                        <input type="number" class="form-control" id="color" name="color[]"
+                            placeholder="Enter Product Color">
+                    </div>
+                    <div class="form-group">
                         <label for="qty">Product Quantity</label>
                         <input type="number" class="form-control" id="qty" name="qty"
                             placeholder="Enter Product Quantity" required>
@@ -71,15 +76,15 @@
                     </div>
                     <div class="form-group">
                         <label for="short_desc">Short Description</label>
-                        <textarea id="summernote" name="short_desc" >Place <em>some</em> <u>text</u> <strong>here</strong></textarea>
+                        <textarea id="summernote" name="short_desc">Place <em>some</em> <u>text</u> <strong>here</strong></textarea>
                     </div>
                     <div class="form-group">
                         <label for="long_desc">Long Description</label>
-                        <textarea id="summernote2" name="long_desc" >Place <em>some</em> <u>text</u> <strong>here</strong></textarea>
+                        <textarea id="summernote2" name="long_desc">Place <em>some</em> <u>text</u> <strong>here</strong></textarea>
                     </div>
                     <div class="form-group">
                         <label for="product_policy">Product Policy</label>
-                        <textarea id="summernote3" name="product_policy" >Place <em>some</em> <u>text</u> <strong>here</strong></textarea>
+                        <textarea id="summernote3" name="product_policy">Place <em>some</em> <u>text</u> <strong>here</strong></textarea>
                     </div>
                     <div class="form-group">
                         <label for="image">Image input</label>
