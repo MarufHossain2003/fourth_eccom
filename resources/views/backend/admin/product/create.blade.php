@@ -39,11 +39,18 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="color_fields">
                         <label for="color">Product Color(optional)</label>
-                        <input type="number" class="form-control" id="color" name="color[]"
+                        <input type="text" class="form-control" id="color" name="color[]"
                             placeholder="Enter Product Color">
                     </div>
+                    <button type="button" class="btn btn-primary" id="add_color">Add More Color</button>
+                    <div class="form-group" id="size_fields">
+                        <label for="size">Product Size(optional)</label>
+                        <input type="text" class="form-control" id="size" name="size[]"
+                            placeholder="Enter Product Size">
+                    </div>
+                    <button type="button" class="btn btn-primary" id="add_size">Add More Size</button>
                     <div class="form-group">
                         <label for="qty">Product Quantity</label>
                         <input type="number" class="form-control" id="qty" name="qty"
@@ -141,5 +148,45 @@
                 theme: "monokai"
             });
         })
+    </script>
+    <script>
+        // add more color field
+        $(document).ready(function() {
+            $("#add_color").click(function() {
+                $("#color_fields").append(
+                    `<div class="input-group mt-3 color-group">
+                    <input type="text" class="form-control" name="color[]" placeholder="Enter Product Color">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-danger remove-color">Remove</button>
+                    </div>
+                </div>`
+                );
+            });
+
+            // Remove color field
+            $("#color_fields").on("click", ".remove-color", function() {
+                $(this).closest('.color-group').remove();
+            });
+        });
+    </script>
+    <script>
+        // add more size field
+        $(document).ready(function() {
+            $("#add_size").click(function() {
+                $("#size_fields").append(
+                    `<div class="input-group mt-3 size-group">
+                    <input type="text" class="form-control" name="size[]" placeholder="Enter Product Size">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-danger remove-size">Remove</button>
+                    </div>
+                </div>`
+                );
+            });
+
+            // Remove size field
+            $("#size_fields").on("click", ".remove-size", function() {
+                $(this).closest('.size-group').remove();
+            });
+        });
     </script>
 @endpush
