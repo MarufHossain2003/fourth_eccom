@@ -63,7 +63,7 @@
                     </div>
                     <div class="form-group">
                         <label for="regular_price">Regular Price</label>
-                        <input type="text" class="form-control" id="buy_price" name="buy_price"
+                        <input type="text" class="form-control" id="regular_price" name="regular_price"
                             placeholder="Enter Regular Price" required>
                     </div>
                     <div class="form-group">
@@ -98,6 +98,16 @@
                         <div class="input-group">
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="image" name="image"
+                                    accept="image/*" required>
+                                <label class="custom-file-label" for="image">Choose file</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="galleryImage">Gallery Image input</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="galleryImage[]" multiple name="galleryImage"
                                     accept="image/*" required>
                                 <label class="custom-file-label" for="image">Choose file</label>
                             </div>
@@ -155,7 +165,7 @@
             $("#add_color").click(function() {
                 $("#color_fields").append(
                     `<div class="input-group mt-3 color-group">
-                    <input type="text" class="form-control" name="color[]" placeholder="Enter Product Color">
+                    <input type="text" class="form-control" name="color[]" placeholder="Enter Product Color" required>
                     <div class="input-group-append">
                         <button type="button" class="btn btn-danger remove-color">Remove</button>
                     </div>
@@ -175,7 +185,7 @@
             $("#add_size").click(function() {
                 $("#size_fields").append(
                     `<div class="input-group mt-3 size-group">
-                    <input type="text" class="form-control" name="size[]" placeholder="Enter Product Size">
+                    <input type="text" class="form-control" name="size[]" placeholder="Enter Product Size" required>
                     <div class="input-group-append">
                         <button type="button" class="btn btn-danger remove-size">Remove</button>
                     </div>

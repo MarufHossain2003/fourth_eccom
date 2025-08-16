@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Color;
 use App\Models\Product;
+use App\Models\Size;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -60,6 +62,25 @@ class ProductController extends Controller
                 $product->product_policy = $request->product_policy;
 
                 $product->save();
+
+                // insert Product Color
+                if(isset($request->color)){
+                 foreach($request->color as $name){
+                    $clor = new Color();
+                    $clor->product_id = $product->id;
+                    $clor->color_name = $name;
+                    $clor->save();
+                 }   
+                }
+                // insert Product Size
+                if(isset($request->size)){
+                 foreach($request->size as $name){
+                    $size = new Size();
+                    $size->product_id = $product->id;
+                    $size->size_name = $name;
+                    $size->save();
+                 }   
+                }
                 toastr()->success('Product Created Successfully');
                 return redirect()->back();
             }
