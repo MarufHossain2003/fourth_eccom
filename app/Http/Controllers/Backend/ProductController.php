@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Color;
+use App\Models\GalleryImage;
 use App\Models\Product;
 use App\Models\Size;
 use App\Models\SubCategory;
@@ -16,8 +17,8 @@ class ProductController extends Controller
 {
     public function listProduct()
     {
-        if(Auth::user()){
-            if(Auth::user()->role == 1){
+        if (Auth::user()) {
+            if (Auth::user()->role == 1) {
                 $products = Product::orderBy('id', 'desc')->with('category', 'subCategory')->get();
                 // dd($products);
                 return view('backend.admin.product.list', compact('products'));
@@ -27,8 +28,8 @@ class ProductController extends Controller
 
     public function createProduct()
     {
-        if(Auth::user()){
-            if(Auth::user()->role == 1){
+        if (Auth::user()) {
+            if (Auth::user()->role == 1) {
                 $categories = Category::orderBy('name', 'asc')->get();
                 $subCategories = SubCategory::orderBy('name', 'asc')->get();
                 return view('backend.admin.product.create', compact('categories', 'subCategories'));
@@ -38,11 +39,11 @@ class ProductController extends Controller
 
     public function storeProduct(Request $request)
     {
-        if(Auth::user()){
-            if(Auth::user()->role == 1){
+        if (Auth::user()) {
+            if (Auth::user()->role == 1) {
                 $product = new Product();
-                if(isset($request->image)){
-                    $imageName = rand().'-product-'.'.'.$request->image->extension();
+                if (isset($request->image)) {
+                    $imageName = rand() . '-product-' . '.' . $request->image->extension();
                     $request->image->move('backend/images/product/', $imageName);
                     $product->image = $imageName;
                 }
@@ -64,27 +65,53 @@ class ProductController extends Controller
                 $product->save();
 
                 // insert Product Color
-                if(isset($request->color)){
-                 foreach($request->color as $name){
-                    $clor = new Color();
-                    $clor->product_id = $product->id;
-                    $clor->color_name = $name;
-                    $clor->save();
-                 }   
+                if (isset($request->color)) {
+                    foreach ($request->color as $name) {
+                        $clor = new Color();
+                        $clor->product_id = $product->id;
+                        $clor->color_name = $name;
+                        $clor->save();
+                    }
                 }
                 // insert Product Size
-                if(isset($request->size)){
-                 foreach($request->size as $name){
-                    $size = new Size();
-                    $size->product_id = $product->id;
-                    $size->size_name = $name;
-                    $size->save();
-                 }   
+                if (isset($request->size)) {
+                    foreach ($request->size as $name) {
+                        $size = new Size();
+                        $size->product_id = $product->id;
+                        $size->size_name = $name;
+                        $size->save();
+                    }
+                }
+
+                // insert Gallery Image
+                if (isset($request->galleryImage)) {
+                    foreach ($request->galleryImage as $image) {
+                        $galleryImage = new GalleryImage();
+                        $galleryImage->product_id = $product->id;
+
+                        $imageName = rand() . '-product-' . '.' . $image->extension();
+                        $image->move('backend/images/galleryImage/', $imageName);
+                        $galleryImage->image = $imageName;
+
+                        $galleryImage->save();
+                    }
                 }
                 toastr()->success('Product Created Successfully');
                 return redirect()->back();
             }
         }
     }
-}
 
+    public function editProduct($id)
+    {
+        if (Auth::user()) {
+            if (Auth::user()->role == 1) {
+                $categories = Category::orderBy('name', 'asc')->get();
+                $subCategories = SubCategory::orderBy('name', 'asc')->get();
+                $product = Product::where('id', $id)->with('color', 'size', 'galleryImage')->first();
+                // dd($product);
+                return view('backend.admin.product.edit', compact('product', 'categories', 'subCategories'));
+            }
+        }
+    }
+}
