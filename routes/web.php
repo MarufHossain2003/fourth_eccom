@@ -23,7 +23,7 @@ Route::get('/',                             [HomeController::class, 'index']);
 Route::get('/shop',                         [HomeController::class, 'shopProducts']);
 Route::get('/return-process',               [HomeController::class, 'returnProducts']);
 Route::get('/checkout',                     [HomeController::class, 'checkOut']);
-Route::get('/product-details',              [HomeController::class, 'productDetails']);
+Route::get('/product-details/{slug}',              [HomeController::class, 'productDetails']);
 
 Auth::routes();
 

@@ -223,7 +223,7 @@ class ProductController extends Controller
 
                 $galleryImage = GalleryImage::where('product_id', $product->id)->get();
                 foreach ($galleryImage as $data) {
-                    if ($data->data && file_exists('backend/images/galleryImage/' . $data->image)) {
+                    if ($data->image && file_exists('backend/images/galleryImage/' . $data->image)) {
                         unlink('backend/images/galleryImage/' . $data->image);
                     }
                     $data->delete();
