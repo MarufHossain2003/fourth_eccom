@@ -35,6 +35,11 @@ class Product extends Model
     {
         return $this->hasMany(GalleryImage::class, 'product_id', 'id');
     }
+
+    public function cart()
+    {
+        return $this->hasMany(Cart::class, 'product_id', 'id');
+    }
 }
 
 // Product belongs to a category
@@ -42,3 +47,4 @@ class Product extends Model
 // Product has many colors
 // Product has many sizes
 // product has many gallery images 
+// product has many carts

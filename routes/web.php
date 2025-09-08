@@ -23,7 +23,11 @@ Route::get('/',                             [HomeController::class, 'index']);
 Route::get('/shop',                         [HomeController::class, 'shopProducts']);
 Route::get('/return-process',               [HomeController::class, 'returnProducts']);
 Route::get('/checkout',                     [HomeController::class, 'checkOut']);
-Route::get('/product-details/{slug}',              [HomeController::class, 'productDetails']);
+Route::get('/product-details/{slug}',       [HomeController::class, 'productDetails']);
+
+// Add to cart route
+Route::post('/product/addtocart-details/{id}',              [HomeController::class, 'addtoCartDetails']);
+Route::get('/product/addtocart/{id}',                       [HomeController::class, 'addtoCart']);
 
 Auth::routes();
 
