@@ -1,4 +1,5 @@
-	<header class="header-section">
+{{-- @dd($cartproducts) --}}
+<header class="header-section">
 		<div class="container">
 			<div class="header-top-wrapper">
 				<a href="{{url('/')}}" class="brand-logo-outer">
@@ -18,23 +19,38 @@
 						<div class="header-top-right-item-link">
 							<span class="icon-outer">
 								<i class="fas fa-cart-plus"></i>
-								<span class="count-number">1</span>
+								<span class="count-number">{{$addtoCartCount}}</span>
 							</span>
 							Cart
 						</div>
 						<div class="cart-items-wrapper">
 							<div class="cart-items-outer">
+								@php
+									$totalPrice = 0;
+								@endphp
+								@foreach ($cartproducts as $cart)
+								@php
+									$totalPrice = $totalPrice + $cart->qty * $cart->price;
+								@endphp
 								<div class="cart-item-outer">
-									<a href="#" class="cart-product-image">
-										<img src="{{asset('frontend/assets/images/product.png')}}" alt="product">
+									<a href="{{url('/product/view-cart')}}" class="cart-product-image">
+										<img src="{{asset('backend/images/product/'.$cart->product->image)}}" alt="product">
 									</a>
 									<div class="cart-product-name-price">
-										<a href="#" class="product-name">
-											Test Product
+										<a href="{{url('/product/view-cart')}}" class="product-name">
+											{{$cart->product->name}} <br>
 										</a>
-										<span class="product-price">
-											৳ 300
+										@if ($cart->product->discount_price == null)
+											<span class="product-price">
+											৳ {{$cart->product->regular_price}}
 										</span>
+										@endif
+										@if ($cart->product->discount_price != null)
+											<span class="product-price">
+											৳ {{$cart->product->discount_price}}
+										</span>
+										@endif
+
 									</div>
 									<div class="cart-item-delete">
 										<a href="#" class="delete-btn">
@@ -42,15 +58,16 @@
 										</a>
 									</div>
 								</div>
+								@endforeach
 							</div>
 							<div class="shopping-cart-footer">
 								<div class="shopping-cart-total">
 									<h4>
-										Total <span>৳ 300</span>
+										Total <span>৳ {{$totalPrice}}</span>
 									</h4>
 								</div>
 								<div class="shopping-cart-button">
-									<a href="{{url('/product-details')}}" class="view-cart-link">View cart</a>
+									<a href="{{url('/product/view-cart')}}" class="view-cart-link">View cart</a>
 									<a href="{{url('/checkout')}}" class="checkout-link">Checkout</a>
 								</div>
 							</div>

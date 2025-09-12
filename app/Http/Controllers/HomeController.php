@@ -23,6 +23,10 @@ class HomeController extends Controller
         return view('frontend.home.shop');
     }
 
+    public function productCart()
+    {
+        return view('frontend.home.view-cart');
+    }
     public function returnProducts()
     {
         return view('frontend.home.return-process');
@@ -37,6 +41,8 @@ class HomeController extends Controller
     {
         $product = Product::where('slug', $slug)->with('color', 'size', 'galleryImage')->first();
         // dd($product);
+        // $addtoCart = Cart::where('ip_address', request()->ip())->get();
+        // dd($addtoCart);
         return view('frontend.home.product-details', compact('product'));
     }
 

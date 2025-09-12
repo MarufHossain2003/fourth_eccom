@@ -24,6 +24,7 @@ Route::get('/shop',                         [HomeController::class, 'shopProduct
 Route::get('/return-process',               [HomeController::class, 'returnProducts']);
 Route::get('/checkout',                     [HomeController::class, 'checkOut']);
 Route::get('/product-details/{slug}',       [HomeController::class, 'productDetails']);
+Route::get('/product/view-cart',            [HomeController::class, 'productCart']);
 
 // Add to cart route
 Route::post('/product/addtocart-details/{id}',              [HomeController::class, 'addtoCartDetails']);
