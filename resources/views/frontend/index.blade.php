@@ -270,4 +270,4 @@
     </section>
     <!-- /Popular Product -->
 @endsection
-@stack('scripts')
+@stack('script')

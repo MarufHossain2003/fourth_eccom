@@ -53,7 +53,7 @@
 
 									</div>
 									<div class="cart-item-delete">
-										<a href="#" class="delete-btn">
+										<a href="{{'/product/addtocart/delete/'.$cart->id}}" class="delete-btn">
 											<i class="fas fa-trash-alt"></i>
 										</a>
 									</div>
