@@ -2,7 +2,8 @@
 @section('content')
     <section class="checkout-section">
         <div class="container">
-            <form action="" method="post" class="form-group billing-address-form" enctype="multipart/form-data">
+            <form action="{{url('/confirm-order')}}" method="post" class="form-group billing-address-form" enctype="multipart/form-data">
+                @csrf
                 <div class="row">
                     <div class="col-lg-8 col-md-6">
                         <div class="checkout-wrapper">
@@ -10,11 +11,11 @@
                                 <h4 class="title">Billing / Shipping Details</h4>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <input type="text" name="name" class="form-control"
+                                        <input type="text" name="c_name" class="form-control"
                                             placeholder="Enter Full Name *" />
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="text" name="phone" class="form-control" placeholder="Phone *" />
+                                        <input type="text" name="c_phone" class="form-control" placeholder="Phone *" />
                                     </div>
                                     <div class="col-md-12">
                                         <input type="email" name="email" class="form-control" placeholder="email *" />
@@ -71,10 +72,10 @@
                                         <span class="checkout-item-count">
                                             Color: {{$cart->color??'N/A'}}
                                         </span>
-                                        <div class="checkout-product-incre-decre">
+                                        {{-- <div class="checkout-product-incre-decre">
                                             <input type="number" readonly name="" placeholder="Qty" min="1"
                                                 style="height: 35px;" value="1">
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                                 <div class="checkout-item-right">
@@ -98,6 +99,7 @@
                                 <div class="sub-total-item grand-total">
                                     <strong>Grand Total</strong>
                                     <strong id="grandTotal">৳ {{$totalPrice}}</strong>
+                                    <input type="text" id="inputGrandTotal" name="inputGrandTotal" value="" hidden>
                                 </div>
                             </div>
                             <div class="payment-item-outer">
@@ -139,6 +141,7 @@
             // console.log(grandTotal);
             document.getElementById('deliveryCharge').innerHTML = '৳ '+ charge;
             document.getElementById('grandTotal').innerHTML = '৳ '+ grandTotal;
+            document.getElementById('inputGrandTotal').value = grandTotal;
         }
         function grandTotalOut(){
             var subTotal = parseFloat(document.getElementById('subTotalHidden').value);
@@ -149,6 +152,7 @@
             // console.log(grandTotal);
             document.getElementById('deliveryCharge').innerHTML = '৳ '+ charge;
             document.getElementById('grandTotal').innerHTML = '৳ '+ grandTotal;
+            document.getElementById('inputGrandTotal').value = grandTotal;
         }
     </script>
 @endpush

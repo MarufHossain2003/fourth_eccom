@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OrderRequest;
 use App\Models\Cart;
+use App\Models\Order;
+use App\Models\OrderDetails;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -116,5 +119,51 @@ class HomeController extends Controller
         $cartProduct = Cart::find($id);
         $cartProduct->delete();
         return redirect()->back();
+    }
+
+    // confirm order
+    public function confirmOrder(OrderRequest $request)
+    {
+        $order = new Order();
+
+        $previousOrder = Order::orderBy('id', 'desc')->first();
+        if($previousOrder == null){
+            $order->invoiceId = 'AJBD-1';
+        }
+        if($previousOrder != null){
+            $generateInvoiceId = 'AJBD-'.$previousOrder->id+1;
+            $order->invoiceId = $generateInvoiceId;
+        }
+        $order->c_name  = $request->c_name;
+        $order->c_phone = $request->c_phone;
+        $order->email   = $request->email;
+        $order->address = $request->address;
+        $order->area    = $request->area;
+        $order->price   = $request->inputGrandTotal;
+        
+        // Store Info into OrderDetails Table...
+        $cartProducts = Cart::with('product')->where('ip_address', $request->ip())->get();
+        if($cartProducts->isNotEmpty()){
+            $order->save();
+            foreach($cartProducts as $cart){
+                $orderDetails = new OrderDetails();
+
+                $orderDetails->order_id   = $order->id;
+                $orderDetails->product_id = $cart->product_id;
+                $orderDetails->qty        = $cart->qty;
+                $orderDetails->price      = $cart->price;
+                $orderDetails->size       = $cart->size;
+                $orderDetails->color      = $cart->color;
+                $orderDetails->save();
+                $cart->delete();
+            }
+        }
+        else{
+            toastr()->warning('No product in cart!!');
+            return redirect('/');
+        }
+
+        toastr()->success('Order Placed Successfully!!');
+        return redirect('/');
     }
 }

@@ -29,10 +29,13 @@ Route::get('/product/view-cart',            [HomeController::class, 'productCart
 // Add to cart route
 Route::post('/product/addtocart-details/{id}',              [HomeController::class, 'addtoCartDetails']);
 Route::get('/product/addtocart/{id}',                       [HomeController::class, 'addtoCart']);
-Route::get('/product/addtocart/delete/{id}',                       [HomeController::class, 'deleteAddtoCart']);
+Route::get('/product/addtocart/delete/{id}',                [HomeController::class, 'deleteAddtoCart']);
 
-Auth::routes();
+// Make Order
+Route::post('/confirm-order',               [HomeController::class, 'confirmOrder']);
 
+
+// Admin Routes
 Route::get('/login',                        [AdminController::class, 'adminLogin']);
 Route::post('/login-check',                 [AdminController::class, 'loginAccess']);
 Route::get('/dashboard',                    [AdminController::class, 'adminDashboard']);
