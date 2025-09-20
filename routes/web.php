@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
@@ -33,6 +34,7 @@ Route::get('/product/addtocart/delete/{id}',                [HomeController::cla
 
 // Make Order
 Route::post('/confirm-order',               [HomeController::class, 'confirmOrder']);
+Route::get('order-confirmed/{invoiceId}', [HomeController::class, 'tahnkYouMessage']);
 
 
 // Admin Routes
@@ -63,3 +65,8 @@ Route::post('/admin/product/store',            [ProductController::class, 'store
 Route::get('/admin/product/delete/{id}',       [ProductController::class, 'deleteProduct']);
 Route::get('/admin/product/edit/{id}',         [ProductController::class, 'editProduct']);
 Route::post('/admin/product/update/{id}',      [ProductController::class, 'updateProduct']);
+
+
+// Common Settings
+Route::get('/admin/general-setting',                [SettingController::class, 'ShowSetting']);
+Route::post('/admin/general-setting/update',        [SettingController::class, 'updateSetting']);

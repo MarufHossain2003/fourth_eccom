@@ -2,7 +2,7 @@
 		<div class="footer__top-wrapper">
 			<div class="container">
 				<a href="{{url('/')}}" class="footer__brand-logo-outer">
-					<img src="{{asset('frontend/assets/images/logo.png')}}" class="footer__brand-logo-inner" />
+					<img src="{{asset('backend/images/settings/'.$frontendSettings->logo)}}" class="footer__brand-logo-inner" />
 				</a>
 			</div>
 		</div>    
@@ -49,7 +49,7 @@
 										Address:                                   
 									</p>
 									<p class="footer__contact-info-list-item-value">
-										Uttara, Dhaka                                 
+										{ {!! $frontendSettings->address!!}}
 									</p>
 								</li>
 								<li class="footer__contact-info-list-item">
@@ -57,7 +57,7 @@
 										Phone:                                   
 									</p>
 									<a href="tel:0123456857" class="footer__contact-info-list-item-value">
-										0123456857
+										{{$frontendSettings->phone}}
 									</a>
 								</li>
 								<li class="footer__contact-info-list-item">
@@ -65,7 +65,7 @@
 										Email:                                   
 									</p>
 									<a href="mailto:info@gmail.com" class="footer__contact-info-list-item-value">
-										info@gmail.com
+										{{$frontendSettings->email}}
 									</a>
 								</li>
 							</ul>
@@ -135,8 +135,8 @@
 		<div class="footer__bottom-wrapper">
 			<div class="container">
 				<p class="footer__bottom-text">
-					© 2024, All rights reserved
-					<strong class="text-brand">Nitto Mart</strong>
+					© 2025, All rights reserved
+					<strong class="text-brand">Amar Jinish BD</strong>
 				</p>
 			</div>
 		</div>
