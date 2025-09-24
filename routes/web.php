@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\SubCategoryController;
@@ -65,6 +66,19 @@ Route::post('/admin/product/store',            [ProductController::class, 'store
 Route::get('/admin/product/delete/{id}',       [ProductController::class, 'deleteProduct']);
 Route::get('/admin/product/edit/{id}',         [ProductController::class, 'editProduct']);
 Route::post('/admin/product/update/{id}',      [ProductController::class, 'updateProduct']);
+
+// Order Routes
+Route::get('/admin/orders/edit/{id}',                  [OrderController::class, 'editOrders']);
+Route::post('/admin/orders/update/{id}',                  [OrderController::class, 'updateOrders']);
+Route::get('/admin/orders/all-orders',                  [OrderController::class, 'ShowAllOrders']);
+Route::get('/admin/orders/pending-orders',              [OrderController::class, 'ShowPendingOrders']);
+Route::get('/admin/orders/confirmed-orders',           [OrderController::class, 'ShowConfirmOrders']);
+Route::get('/admin/orders/delivered-orders',            [OrderController::class, 'ShowDeliveredOrders']);
+Route::get('/admin/orders/cancelled-orders',            [OrderController::class, 'ShowCancelledOrders']);
+Route::get('/admin/orders/status-pending/{id}',              [OrderController::class, 'statusPending']);
+Route::get('/admin/orders/status-confirmed/{id}',            [OrderController::class, 'statusConfirmed']);
+Route::get('/admin/orders/status-delivered/{id}',            [OrderController::class, 'statusDelivered']);
+Route::get('/admin/orders/status-cancelled/{id}',            [OrderController::class, 'statusCancelled']);
 
 
 // Common Settings
