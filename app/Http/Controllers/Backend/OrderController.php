@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class OrderController extends Controller
 {
@@ -76,6 +77,39 @@ class OrderController extends Controller
 
                 if ($order->courier_name != null) {
                     $order->status = 'confirmed';
+
+                    if($order->courier_name == "steadfast"){
+                        // integrate steadfast api here
+                        $endPoint = "https://portal.packzy.com/api/v1/create_order";
+                        // Authentication Parameters
+                        $apiKey = "bpgevaoe6rtz4w2zgy0cr92mt9jnvvkx";
+                        $secrateKey = "hp8fro7whwielarmgevqxnlo";
+                        // Body Parameters
+                        $invoice = $order->invoice_id;
+                        $customerName = $order->c_name;
+                        $customerPhone = $order->c_phone;
+                        $customerAddress = $order->address;
+                        $price = $order->price;
+
+                        // Header
+                        $header = [
+                            'Api-Key' => $apiKey,
+                            'Secret-Key' => $secrateKey,
+                            'Content-Type' => 'application/json',
+                        ];
+                        // Payload
+                        $payload = [
+                            'invoice' => $invoice,
+                            'recipient_name' => $customerName,
+                            'recipient_phone' => $customerPhone,
+                            'recipient_address' => $customerAddress,
+                            'cod_amount' => $price,
+                        ];
+                        $response = Http::withHeaders($header)->post($endPoint, $payload);
+                        // dd($response->body());
+                        $responsedata = $response->json();
+
+                    }
                     $order->save();
                     toastr()->success('Order has been delivered!');
                     return redirect()->back();
