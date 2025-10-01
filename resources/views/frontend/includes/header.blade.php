@@ -6,7 +6,8 @@
 					<img src="{{asset('backend/images/settings/'.$frontendSettings->logo)}}" alt="Logo">
 				</a>
 				<div class="search-form-outer">
-					<form action="" method="GET" class="form-group search-form">
+					<form action="{{url('/search-products')}}" method="GET" class="form-group search-form">
+						@csrf
 						<input type="text" name="search" class="form-control" placeholder="Search for items...">
 						<button type="submit"><i class="fas fa-search"></i></button>
 					</form>
@@ -87,19 +88,23 @@
 							</div>
 							<div class="header__category-items-outer">
 								<ul class="header__category-list">
-									<li class="header__category-list-item item-has-submenu">
-										<a href="category-product.html" class="header__category-list-item-link">
-											<img src="{{asset('frontend/assets/images/product.png')}}" alt="category">
-											Test Category
+									@foreach ($allCategories as $category)
+										<li class="header__category-list-item item-has-submenu">
+										<a href="{{url('category-products/'.$category->slug)}}" class="header__category-list-item-link">
+											<img src="{{asset('backend/images/category/' . $category->image)}}" alt="category">
+											{{$category->name}}
 										</a>
 										<ul class="header__nav-item-category-submenu">
-											<li class="header__category-submenu-item">
-												<a href="sub-category-product.html" class="header__category-submenu-item-link">
-													Test Subcategory
+											@foreach ($category->subCategories as $subCategory)
+												<li class="header__category-submenu-item">
+												<a href="{{url('sub-category-products/'.$subCategory->slug)}}" class="header__category-submenu-item-link">
+													{{$subCategory->name}}
 												</a>
 											</li>
+											@endforeach
 										</ul>
 									</li>
+									@endforeach
 								</ul>
 							</div>
 						</div>

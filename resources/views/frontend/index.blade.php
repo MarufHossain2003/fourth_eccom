@@ -6,25 +6,28 @@
             <div class="home__slider-sec-wrap">
                 <div class="home__category-outer">
                     <ul class="header__category-list">
-                        <li class="header__category-list-item item-has-submenu">
-                            <a href="category-product.html" class="header__category-list-item-link">
-                                <img src="{{ asset('frontend/assets/images/product.png') }}" alt="category">
-                                Test Category
-                            </a>
-                            <ul class="header__nav-item-category-submenu">
-                                <li class="header__category-submenu-item">
-                                    <a href="sub-category-product.html" class="header__category-submenu-item-link">
-                                        Test Subcategory
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                        @foreach ($allCategories as $category)
+                            <li class="header__category-list-item item-has-submenu">
+                                <a href="{{url('category-products/'.$category->slug)}}" class="header__category-list-item-link">
+                                    <img src="{{ asset('backend/images/category/' . $category->image) }}" alt="category">
+                                    {{ $category->name }}
+                                </a>
+                                <ul class="header__nav-item-category-submenu">
+                                    @foreach ($category->subCategories as $subcategory)
+                                        <li class="header__category-submenu-item">
+                                        <a href="{{url('sub-category-products/'.$subcategory->slug)}}" class="header__category-submenu-item-link">
+                                            {{$subcategory->name}}
+                                        </a>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
                 <div class="home__slider-items-wrapper">
                     <div class="home__slider-item-outer">
-                        <img src="{{ asset('frontend/assets/images/slider.jpg') }}" alt="image"
-                            class="home__slider-item-image">
+                        <img src="{{ asset('frontend/assets/images/slider.jpg') }}" alt="image" class="home__slider-item-image">
                     </div>
                 </div>
             </div>
@@ -40,13 +43,15 @@
                 </h1>
             </div>
             <div class="categoris-items-wrapper owl-carousel">
-                <a href="#" class="categoris-item">
-                    <img src="{{ asset('frontend/assets/images/product.png') }}" alt="category" />
+                @foreach ($allCategories as $category)
+                    <a href="{{url('category-products/'.$category->slug)}}" class="categoris-item">
+                    <img src="{{ asset('backend/images/category/' . $category->image) }}" alt="category" />
                     <h6 class="categoris-name">
-                        Test Category
+                        {{$category->name}}
                     </h6>
                     <span class="items-number">1 items</span>
                 </a>
+                @endforeach
             </div>
         </div>
     </section>
@@ -89,30 +94,31 @@
                 @foreach ($hotProduct as $product)
                     <div class="product__item-outer">
                         <div class="product__item-image-outer">
-                            <a href="{{ url('/product-details/'.$product->slug) }}" class="product__item-image-inner">
-                                <img src="{{ asset('backend/images/product/'.$product->image) }}" alt="Product Image" />
+                            <a href="{{ url('/product-details/' . $product->slug) }}" class="product__item-image-inner">
+                                <img src="{{ asset('backend/images/product/' . $product->image) }}" alt="Product Image" />
                             </a>
                             <div class="product__item-add-cart-btn-outer">
-                                <a href="{{ url('/product/addtocart/'.$product->id) }}" class="product__item-add-cart-btn-inner">
+                                <a href="{{ url('/product/addtocart/' . $product->id) }}"
+                                    class="product__item-add-cart-btn-inner">
                                     Add to Cart
                                 </a>
                             </div>
                             <div class="product__type-badge-outer">
                                 <span class="product__type-badge-inner">
-                                    Hot
+                                    {{$product->product_type}}
                                 </span>
                             </div>
                         </div>
                         <div class="product__item-info-outer">
-                            <a href="{{ url('/product-details/'.$product->slug) }}" class="product__item-name">
-                                {{$product->name}}
+                            <a href="{{ url('/product-details/' . $product->slug) }}" class="product__item-name">
+                                {{ $product->name }}
                             </a>
                             <div class="product__item-price-outer">
                                 <div class="product__item-discount-price">
-                                    <del>{{$product->regular_price}} Tk.</del>
+                                    <del>{{ $product->regular_price }} Tk.</del>
                                 </div>
                                 <div class="product__item-regular-price">
-                                    <span>{{$product->discount_price}} Tk.</span>
+                                    <span>{{ $product->discount_price }} Tk.</span>
                                 </div>
                             </div>
                         </div>
@@ -135,38 +141,39 @@
             </div>
             <div class="product-items-wrapper">
                 @foreach ($newProduct as $product)
-                  <div class="product__item-outer">
-                    <div class="product__item-image-outer">
-                        <a href="{{ url('/product-details/'.$product->slug) }}" class="product__item-image-inner">
-                            <img src="{{ asset('backend/images/product/'.$product->image) }}" alt="Product Image" />
-                        </a>
-                        <div class="product__item-add-cart-btn-outer">
-                            <a href="{{ url('/product/addtocart/'.$product->id) }}" class="product__item-add-cart-btn-inner">
-                                Add to Cart
+                    <div class="product__item-outer">
+                        <div class="product__item-image-outer">
+                            <a href="{{ url('/product-details/' . $product->slug) }}" class="product__item-image-inner">
+                                <img src="{{ asset('backend/images/product/' . $product->image) }}" alt="Product Image" />
                             </a>
-                        </div>
-                        <div class="product__type-badge-outer">
-                            <span class="product__type-badge-inner">
-                                New
-                            </span>
-                        </div>
-                    </div>
-                    <div class="product__item-info-outer">
-                        <a href="{{ url('/product-details/'.$product->slug) }}" class="product__item-name">
-                            {{$product->name}}
-                        </a>
-                        <div class="product__item-price-outer">
-                            <div class="product__item-discount-price">
-                                <del>{{$product->regular_price}} Tk.</del>
+                            <div class="product__item-add-cart-btn-outer">
+                                <a href="{{ url('/product/addtocart/' . $product->id) }}"
+                                    class="product__item-add-cart-btn-inner">
+                                    Add to Cart
+                                </a>
                             </div>
-                            <div class="product__item-regular-price">
-                                <span>{{$product->discount_price}} Tk.</span>
+                            <div class="product__type-badge-outer">
+                                <span class="product__type-badge-inner">
+                                    {{$product->product_type}}
+                                </span>
                             </div>
                         </div>
+                        <div class="product__item-info-outer">
+                            <a href="{{ url('/product-details/' . $product->slug) }}" class="product__item-name">
+                                {{ $product->name }}
+                            </a>
+                            <div class="product__item-price-outer">
+                                <div class="product__item-discount-price">
+                                    <del>{{ $product->regular_price }} Tk.</del>
+                                </div>
+                                <div class="product__item-regular-price">
+                                    <span>{{ $product->discount_price }} Tk.</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>  
                 @endforeach
-                 
+
             </div>
         </div>
     </section>
@@ -185,37 +192,38 @@
             <div class="product-items-wrapper">
                 @foreach ($regularProduct as $product)
                     <div class="product__item-outer">
-                    <div class="product__item-image-outer">
-                        <a href="{{ url('/product-details/'.$product->slug) }}" class="product__item-image-inner">
-                            <img src="{{ asset('backend/images/product/'.$product->image) }}" alt="Product Image" />
-                        </a>
-                        <div class="product__item-add-cart-btn-outer">
-                            <a href="{{ url('/product/addtocart/'.$product->id) }}" class="product__item-add-cart-btn-inner">
-                                Add to Cart
+                        <div class="product__item-image-outer">
+                            <a href="{{ url('/product-details/' . $product->slug) }}" class="product__item-image-inner">
+                                <img src="{{ asset('backend/images/product/' . $product->image) }}" alt="Product Image" />
                             </a>
-                        </div>
-                        <div class="product__type-badge-outer">
-                            <span class="product__type-badge-inner">
-                                Regular
-                            </span>
-                        </div>
-                    </div>
-                    <div class="product__item-info-outer">
-                        <a href="{{ url('/product-details/'.$product->slug) }}" class="product__item-name">
-                            {{$product->name}}
-                        </a>
-                        <div class="product__item-price-outer">
-                            <div class="product__item-discount-price">
-                                <del>{{$product->regular_price}} Tk.</del>
+                            <div class="product__item-add-cart-btn-outer">
+                                <a href="{{ url('/product/addtocart/' . $product->id) }}"
+                                    class="product__item-add-cart-btn-inner">
+                                    Add to Cart
+                                </a>
                             </div>
-                            <div class="product__item-regular-price">
-                                <span>{{$product->discount_price}} Tk.</span>
+                            <div class="product__type-badge-outer">
+                                <span class="product__type-badge-inner">
+                                    {{$product->product_type}}
+                                </span>
                             </div>
                         </div>
+                        <div class="product__item-info-outer">
+                            <a href="{{ url('/product-details/' . $product->slug) }}" class="product__item-name">
+                                {{ $product->name }}
+                            </a>
+                            <div class="product__item-price-outer">
+                                <div class="product__item-discount-price">
+                                    <del>{{ $product->regular_price }} Tk.</del>
+                                </div>
+                                <div class="product__item-regular-price">
+                                    <span>{{ $product->discount_price }} Tk.</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
                 @endforeach
-                 
+
             </div>
         </div>
     </section>
@@ -234,37 +242,38 @@
             <div class="product-items-wrapper">
                 @foreach ($discountProduct as $product)
                     <div class="product__item-outer">
-                    <div class="product__item-image-outer">
-                        <a href="{{ url('/product-details/'.$product->slug) }}" class="product__item-image-inner">
-                            <img src="{{ asset('backend/images/product/'.$product->image) }}" alt="Product Image" />
-                        </a>
-                        <div class="product__item-add-cart-btn-outer">
-                            <a href="{{ url('/product/addtocart/'.$product->id) }}" class="product__item-add-cart-btn-inner">
-                                Add to Cart
+                        <div class="product__item-image-outer">
+                            <a href="{{ url('/product-details/' . $product->slug) }}" class="product__item-image-inner">
+                                <img src="{{ asset('backend/images/product/' . $product->image) }}" alt="Product Image" />
                             </a>
-                        </div>
-                        <div class="product__type-badge-outer">
-                            <span class="product__type-badge-inner">
-                                Discount
-                            </span>
-                        </div>
-                    </div>
-                    <div class="product__item-info-outer">
-                        <a href="{{ url('/product-details/'.$product->slug) }}" class="product__item-name">
-                            {{$product->name}}
-                        </a>
-                        <div class="product__item-price-outer">
-                            <div class="product__item-discount-price">
-                                <del>{{$product->regular_price}} Tk.</del>
+                            <div class="product__item-add-cart-btn-outer">
+                                <a href="{{ url('/product/addtocart/' . $product->id) }}"
+                                    class="product__item-add-cart-btn-inner">
+                                    Add to Cart
+                                </a>
                             </div>
-                            <div class="product__item-regular-price">
-                                <span>{{$product->discount_price}} Tk.</span>
+                            <div class="product__type-badge-outer">
+                                <span class="product__type-badge-inner">
+                                    {{$product->product_type}}
+                                </span>
                             </div>
                         </div>
+                        <div class="product__item-info-outer">
+                            <a href="{{ url('/product-details/' . $product->slug) }}" class="product__item-name">
+                                {{ $product->name }}
+                            </a>
+                            <div class="product__item-price-outer">
+                                <div class="product__item-discount-price">
+                                    <del>{{ $product->regular_price }} Tk.</del>
+                                </div>
+                                <div class="product__item-regular-price">
+                                    <span>{{ $product->discount_price }} Tk.</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div> 
                 @endforeach
-                
+
             </div>
         </div>
     </section>

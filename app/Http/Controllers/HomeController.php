@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderRequest;
 use App\Models\Cart;
+use App\Models\Category;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\Product;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -21,9 +23,21 @@ class HomeController extends Controller
         return view('frontend.index', compact('hotProduct', 'newProduct', 'regularProduct', 'discountProduct'));
     }
 
-    public function shopProducts()
+    public function shopProducts(Request $request)
     {
-        return view('frontend.home.shop');
+        if(isset($request->categoryId)){
+            $type = 'category';
+            $categoryProducts = Category::where('id', $request->categoryId)->with('product')->first();
+            return view('frontend.home.shop', compact('categoryProducts', 'type'));
+        }
+        if(isset($request->subCategoryId)){
+            $type = 'subCategory';
+            $subCategoryProducts = SubCategory::where('id', $request->subCategoryId)->with('product')->first();
+            return view('frontend.home.shop', compact('subCategoryProducts', 'type'));
+        }
+        $type = 'normal';
+        $products = Product::orderBy('id', 'desc')->get();
+        return view('frontend.home.shop', compact('products', 'type'));
     }
 
     public function productCart()
@@ -170,5 +184,26 @@ class HomeController extends Controller
     public function tahnkYouMessage($invoiceId)
     {
         return view('frontend.home.thankyou', compact('invoiceId'));
+    }
+
+    public function categoryProducts($slug)
+    {
+        $caegoryProducts = Category::where('slug', $slug)->with('product')->first();
+        // dd($caegoryProducts);
+        return view('frontend.home.category-products', compact('caegoryProducts'));
+    }
+
+    public function subCategoryProducts($slug)
+    {
+        $subCategoryProducts = SubCategory::where('slug', $slug)->with('product')->first();
+        // dd($subCategoryProducts);
+        return view('frontend.home.sub-category-products', compact('subCategoryProducts'));
+    }
+
+    // Search Products
+    public function searchProducts(Request $request)
+    {
+        $products = Product::where('name', 'like', '%'.$request->search.'%')->get();
+        return view('frontend.home.search-products', compact('products'));
     }
 }

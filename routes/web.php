@@ -35,8 +35,14 @@ Route::get('/product/addtocart/delete/{id}',                [HomeController::cla
 
 // Make Order
 Route::post('/confirm-order',               [HomeController::class, 'confirmOrder']);
-Route::get('order-confirmed/{invoiceId}', [HomeController::class, 'tahnkYouMessage']);
+Route::get('order-confirmed/{invoiceId}',   [HomeController::class, 'tahnkYouMessage']);
 
+//Category Products
+Route::get('category-products/{slug}',       [HomeController::class, 'categoryProducts']);
+Route::get('sub-category-products/{slug}',   [HomeController::class, 'subCategoryProducts']);
+
+// Search Product
+Route::get('/search-products',                [HomeController::class, 'searchProducts']);
 
 // Admin Routes
 Route::get('/login',                        [AdminController::class, 'adminLogin']);
@@ -82,7 +88,10 @@ Route::get('/admin/orders/status-cancelled/{id}',           [OrderController::cl
 Route::get('/admin/orders/details/{id}',                    [OrderController::class, 'orderDetails']);
 Route::post('/admin/orders/update/{id}',                    [OrderController::class, 'orderUpdate']);
 
-
 // Common Settings
 Route::get('/admin/general-setting',                [SettingController::class, 'ShowSetting']);
 Route::post('/admin/general-setting/update',        [SettingController::class, 'updateSetting']);
+Route::get('/admin/home-banner',                    [SettingController::class, 'showHomeBanner']);
+Route::post('/admin/home-banner/update',            [SettingController::class, 'updateHomeBanner']);
+Route::get('/admin/privacy-policy',                 [SettingController::class, 'showPrivacyPolicy']);
+Route::post('/admin/privacy-policy/update',         [SettingController::class, 'updatePrivacyPolicy']);

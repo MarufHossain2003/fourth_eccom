@@ -141,6 +141,18 @@
                                   <p>General Setting</p>
                               </a>
                           </li>
+                          <li class="nav-item">
+                              <a href="{{ url('/admin/home-banner') }}" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Home Banner</p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="{{ url('/admin/privacy-policy') }}" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Privacy Policy</p>
+                              </a>
+                          </li>
                       </ul>
                   </li>
               </ul>
