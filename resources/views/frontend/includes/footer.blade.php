@@ -16,7 +16,7 @@
 							</h4>
 							<ul class="footer__list">
 								<li class="footer__list-item">
-									<a href="privacy-policy.html" class="footer__list-item-link">
+									<a href="{{url('/privacy-policy')}}" class="footer__list-item-link">
 										Privacy Policy
 									</a>
 								</li>
@@ -49,7 +49,7 @@
 										Address:                                   
 									</p>
 									<p class="footer__contact-info-list-item-value">
-										{ {!! $frontendSettings->address!!}}
+										{!!$frontendSettings->address!!}
 									</p>
 								</li>
 								<li class="footer__contact-info-list-item">

@@ -27,7 +27,7 @@
                 </div>
                 <div class="home__slider-items-wrapper">
                     <div class="home__slider-item-outer">
-                        <img src="{{ asset('frontend/assets/images/slider.jpg') }}" alt="image" class="home__slider-item-image">
+                        <img src="{{ asset('backend/images/settings/'.$homeBanner->banner) }}" alt="image" class="home__slider-item-image">
                     </div>
                 </div>
             </div>

@@ -44,6 +44,9 @@ Route::get('sub-category-products/{slug}',   [HomeController::class, 'subCategor
 // Search Product
 Route::get('/search-products',                [HomeController::class, 'searchProducts']);
 
+//Inner Pages (footer links)
+Route::get('/privacy-policy',                       [HomeController::class, 'privacyPolicy']);
+
 // Admin Routes
 Route::get('/login',                        [AdminController::class, 'adminLogin']);
 Route::post('/login-check',                 [AdminController::class, 'loginAccess']);

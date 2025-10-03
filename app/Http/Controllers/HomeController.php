@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\OrderRequest;
 use App\Models\Cart;
 use App\Models\Category;
+use App\Models\HomeBanner;
 use App\Models\Order;
 use App\Models\OrderDetails;
+use App\Models\PrivacyPolicy;
 use App\Models\Product;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
@@ -16,11 +18,11 @@ class HomeController extends Controller
     public function index()
     {
         $hotProduct = Product::where('product_type', 'hot')->orderBy('id', 'desc')->get();
-        // dd($hotProduct);
         $newProduct = Product::where('product_type', 'new')->orderBy('id', 'desc')->get();
         $regularProduct = Product::where('product_type', 'regular')->orderBy('id', 'desc')->get();
         $discountProduct = Product::where('product_type', 'discount')->orderBy('id', 'desc')->get();
-        return view('frontend.index', compact('hotProduct', 'newProduct', 'regularProduct', 'discountProduct'));
+        $homeBanner = HomeBanner::first();
+        return view('frontend.index', compact('hotProduct', 'newProduct', 'regularProduct', 'discountProduct', 'homeBanner'));
     }
 
     public function shopProducts(Request $request)
@@ -205,5 +207,12 @@ class HomeController extends Controller
     {
         $products = Product::where('name', 'like', '%'.$request->search.'%')->get();
         return view('frontend.home.search-products', compact('products'));
+    }
+
+    // Inner Pages
+    public function privacyPolicy()
+    {
+        $privacyPolicy = PrivacyPolicy::first();
+        return view('frontend.home.privacy-policy', compact('privacyPolicy'));
     }
 }
