@@ -112,4 +112,42 @@ class SettingController extends Controller
             }
         }
     }
+
+    // Authentication 
+    public function adminLogout()
+    {
+        Auth::logout();
+        return redirect('/login');
+    }
+
+    public function adminCredentials()
+    {
+        if(Auth::user()){
+            if(Auth::user()->role == 1 || Auth::user()->role == 2){
+                $authUser = Auth::user();
+                return view ('backend.admin.credentials', compact('authUser'));
+            }
+        }
+    }
+
+    public function adminCredentialsUpdate(Request $request)
+    {
+        if(Auth::user()){
+            if(Auth::user()->role == 1 || Auth::user()->role == 2){
+                $authUser = Auth::user();
+                if(password_verify($request->old_password, $authUser->password)){
+                    $authUser->password = $request->password;
+                    $authUser->save();
+                    Auth::logout();
+                    toastr()->success('Credentials updated successfully!');
+                    return redirect('/login');
+                } 
+                else {
+                    toastr()->error('Old password does not match!');
+                    return redirect()->back();
+                }
+                
+            }
+        }
+    }
 }

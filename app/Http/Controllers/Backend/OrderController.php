@@ -3,17 +3,20 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OrderConfirmationMail;
 use App\Models\Order;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
     public function ShowAllOrders()
     {
         if (Auth::user()) {
-            if (Auth::user()->role == 1) {
+            if (Auth::user()->role == 1 || Auth::user()->role == 2) {
                 $allOrders = Order::with('orderDetails')->get();
                 // dd($allOrders);
                 return view('backend.admin.orders.allorders', compact('allOrders'));
@@ -21,10 +24,22 @@ class OrderController extends Controller
         }
     }
 
+    public function ShowTodayOrders()
+    {
+        if (Auth::user()) {
+            if (Auth::user()->role == 1 || Auth::user()->role == 2) {
+                $todayDate = Carbon::today();
+                $todayOrders = Order::with('orderDetails')->whereDate('created_at', $todayDate)->get();
+                // dd($allOrders);
+                return view('backend.admin.orders.todayorders', compact('$todayOrders'));
+            }
+        }
+    }
+    
     public function ShowPendingOrders()
     {
         if (Auth::user()) {
-            if (Auth::user()->role == 1) {
+            if (Auth::user()->role == 1 || Auth::user()->role == 2) {
                 $pendingOrders = Order::with('orderDetails')->where('status', 'pending')->get();
                 // dd($allOrders);
                 return view('backend.admin.orders.pendingorders', compact('pendingOrders'));
@@ -35,7 +50,7 @@ class OrderController extends Controller
     public function ShowConfirmOrders()
     {
         if (Auth::user()) {
-            if (Auth::user()->role == 1) {
+            if (Auth::user()->role == 1 || Auth::user()->role == 2) {
                 $confirmedOrders = Order::with('orderDetails')->where('status', 'confirmed')->get();
                 // dd($allOrders);
                 return view('backend.admin.orders.confirmedorders', compact('confirmedOrders'));
@@ -46,7 +61,7 @@ class OrderController extends Controller
     public function statusConfirmed($id)
     {
         if (Auth::user()) {
-            if (Auth::user()->role == 1) {
+            if (Auth::user()->role == 1 || Auth::user()->role == 2) {
                 $order = Order::find($id);
                 $order->status = 'confirmed';
                 $order->save();
@@ -59,7 +74,7 @@ class OrderController extends Controller
     public function statusCancelled($id)
     {
         if (Auth::user()) {
-            if (Auth::user()->role == 1) {
+            if (Auth::user()->role == 1 || Auth::user()->role == 2) {
                 $order = Order::find($id);
                 $order->status = 'cancelled';
                 $order->save();
@@ -72,18 +87,18 @@ class OrderController extends Controller
     public function statusDelivered($id)
     {
         if (Auth::user()) {
-            if (Auth::user()->role == 1) {
+            if (Auth::user()->role == 1 || Auth::user()->role == 2) {
                 $order = Order::find($id);
 
                 if ($order->courier_name != null) {
-                    $order->status = 'confirmed';
+                    $order->status = 'delivered';
 
                     if($order->courier_name == "steadfast"){
                         // integrate steadfast api here
                         $endPoint = "https://portal.packzy.com/api/v1/create_order";
                         // Authentication Parameters
-                        $apiKey = "bpgevaoe6rtz4w2zgy0cr92mt9jnvvkx";
-                        $secrateKey = "hp8fro7whwielarmgevqxnlo";
+                        $apiKey = "";
+                        $secrateKey = "";
                         // Body Parameters
                         $invoice = $order->invoice_id;
                         $customerName = $order->c_name;
@@ -110,6 +125,14 @@ class OrderController extends Controller
                         $responsedata = $response->json();
 
                     }
+
+                    // send email to customer if email id is available
+                    // if($order->email != null){
+                    //     Mail::to($order->email)->send(new OrderConfirmationMail($order));
+                    // }
+                    // send email to customer if email id is available
+                    
+
                     $order->save();
                     toastr()->success('Order has been delivered!');
                     return redirect()->back();
@@ -124,7 +147,7 @@ class OrderController extends Controller
     public function ShowDeliveredOrders()
     {
         if (Auth::user()) {
-            if (Auth::user()->role == 1) {
+            if (Auth::user()->role == 1 || Auth::user()->role == 2) {
                 $deliveredOrders = Order::with('orderDetails')->where('status', 'delivered')->get();
                 // dd($deliveredOrders);
                 return view('backend.admin.orders.deliveredorders', compact('deliveredOrders'));
@@ -135,7 +158,7 @@ class OrderController extends Controller
     public function ShowCancelledOrders()
     {
         if (Auth::user()) {
-            if (Auth::user()->role == 1) {
+            if (Auth::user()->role == 1 || Auth::user()->role == 2) {
                 $cancelledOrders = Order::with('orderDetails')->where('status', 'cancelled')->get();
                 // dd($cancelledOrders);
                 return view('backend.admin.orders.cancelledorders', compact('cancelledOrders'));
@@ -146,7 +169,7 @@ class OrderController extends Controller
     public function orderDetails($id)
     {
         if (Auth::user()) {
-            if (Auth::user()->role == 1) {
+            if (Auth::user()->role == 1 || Auth::user()->role == 2) {
                 $order = Order::where('id', $id)->with('orderDetails')->first();
                 // dd($order);
                 return view('backend.admin.orders.details', compact('order'));
@@ -157,7 +180,7 @@ class OrderController extends Controller
     public function orderUpdate(Request $request, $id)
     {
         if (Auth::user()) {
-            if (Auth::user()->role == 1) {
+            if (Auth::user()->role == 1 || Auth::user()->role == 2) {
                 $order = Order::find($id);
 
                 $order->c_name  = $request->c_name;

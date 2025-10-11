@@ -42,10 +42,10 @@ Route::get('category-products/{slug}',       [HomeController::class, 'categoryPr
 Route::get('sub-category-products/{slug}',   [HomeController::class, 'subCategoryProducts']);
 
 // Search Product
-Route::get('/search-products',                [HomeController::class, 'searchProducts']);
+Route::get('/search-products',               [HomeController::class, 'searchProducts']);
 
 //Inner Pages (footer links)
-Route::get('/privacy-policy',                       [HomeController::class, 'privacyPolicy']);
+Route::get('/privacy-policy',                [HomeController::class, 'privacyPolicy']);
 
 // Admin Routes
 Route::get('/login',                        [AdminController::class, 'adminLogin']);
@@ -80,6 +80,7 @@ Route::post('/admin/product/update/{id}',      [ProductController::class, 'updat
 Route::get('/admin/orders/edit/{id}',                       [OrderController::class, 'editOrders']);
 Route::post('/admin/orders/update/{id}',                    [OrderController::class, 'updateOrders']);
 Route::get('/admin/orders/all-orders',                      [OrderController::class, 'ShowAllOrders']);
+Route::get('/admin/orders/today-orders',                    [OrderController::class, 'ShowTodayOrders']);
 Route::get('/admin/orders/pending-orders',                  [OrderController::class, 'ShowPendingOrders']);
 Route::get('/admin/orders/confirmed-orders',                [OrderController::class, 'ShowConfirmOrders']);
 Route::get('/admin/orders/delivered-orders',                [OrderController::class, 'ShowDeliveredOrders']);
@@ -98,3 +99,21 @@ Route::get('/admin/home-banner',                    [SettingController::class, '
 Route::post('/admin/home-banner/update',            [SettingController::class, 'updateHomeBanner']);
 Route::get('/admin/privacy-policy',                 [SettingController::class, 'showPrivacyPolicy']);
 Route::post('/admin/privacy-policy/update',         [SettingController::class, 'updatePrivacyPolicy']);
+Route::get('/admin/terms-condition',                [SettingController::class, 'showTermsCondition']);
+Route::post('/admin/terms-condition/update',        [SettingController::class, 'updateTermsCondition']);
+Route::get('/admin/refund-policy',                  [SettingController::class, 'showRefundPolicy']);
+Route::post('/admin/refund-policy/update',          [SettingController::class, 'updateRefundPolicy']);
+Route::get('/admin/payment-policy',                 [SettingController::class, 'showPaymentPolicy']);
+Route::post('/admin/payment-policy/update',         [SettingController::class, 'updatePaymentPolicy']);
+
+// Authentication Routes
+Route::get('/admin/logout',                      [SettingController::class, 'adminLogout']);
+Route::get('/admin/credentials',                 [SettingController::class, 'adminCredentials']);
+Route::post('/admin/credentials/update',         [SettingController::class, 'adminCredentialsUpdate']);
+
+// Empolyee Management
+Route::get('/admin/employee-list',                 [AdminController::class, 'employeeList']);
+Route::get('/admin/employee-create',               [AdminController::class, 'employeeCreate']);
+Route::post('/admin/employee-store',               [AdminController::class, 'employeeStore']);
+Route::get('/admin/employee-edit/{id}',            [AdminController::class, 'employeeEdit']);
+Route::post('/admin/employee-update/{id}',         [AdminController::class, 'employeeUpdate']);

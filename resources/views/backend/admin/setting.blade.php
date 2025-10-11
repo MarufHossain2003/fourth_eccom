@@ -23,7 +23,9 @@
                     </div>
                     <div class="form-group">
                         <label for="address">Address</label>
-                        <textarea id="summernote" name="address">{{ $settings->address }}</textarea>
+                        <input type="address" class="form-control" id="address" name="address" value="{{ $settings->address }}" placeholder="Enter address"
+                            required>
+                        {{-- <textarea id="summernote" name="address">{{ $settings->address }}</textarea> --}}
                     </div>
                 
                 <div class="form-group">

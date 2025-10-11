@@ -49,7 +49,7 @@
 										Address:                                   
 									</p>
 									<p class="footer__contact-info-list-item-value">
-										{!!$frontendSettings->address!!}
+										{{$frontendSettings->address}}
 									</p>
 								</li>
 								<li class="footer__contact-info-list-item">

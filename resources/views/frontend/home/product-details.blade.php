@@ -163,8 +163,8 @@
                                 Category
                             </h3>
                             <a href="#" class="category-item-outer">
-                                <img src="{{ asset('frontend/assets/images/product.png') }}" alt="category image">
-                                Test Category
+                                <img src="{{asset('backend/images/category/'.$product->category->image)}}" alt="category image">
+                                {{$product->category->name}}
                             </a>
                         </div>
                     </div>

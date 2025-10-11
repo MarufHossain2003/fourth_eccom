@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->integer('role')->default(1)->comment('1=>admin, 2=>empoyee, 3=>customer');
             $table->string('phone')->nullable();
+            $table->string('nid')->nullable();
             $table->longText('address')->nullable();
             $table->string('image')->nullable();
             $table->rememberToken();

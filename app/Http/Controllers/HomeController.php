@@ -58,7 +58,7 @@ class HomeController extends Controller
 
     public function productDetails($slug)
     {
-        $product = Product::where('slug', $slug)->with('color', 'size', 'galleryImage')->first();
+        $product = Product::where('slug', $slug)->with('color', 'size', 'galleryImage', 'category')->first();
         // dd($product);
         // $addtoCart = Cart::where('ip_address', request()->ip())->get();
         // dd($addtoCart);
