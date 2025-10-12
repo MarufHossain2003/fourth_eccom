@@ -179,6 +179,24 @@
                                   <p>Privacy Policy</p>
                               </a>
                           </li>
+                          <li class="nav-item">
+                              <a href="{{ url('/admin/terms-conditions') }}" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Terms and Conditions</p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="{{ url('/admin/refund-policy') }}" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Refund Policy</p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="{{ url('/admin/payment-policy') }}" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Payment Policy</p>
+                              </a>
+                          </li>
                       </ul>
                   </li>   
                   @endif

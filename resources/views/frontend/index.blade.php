@@ -86,7 +86,7 @@
                 <h1 class="title">
                     Hot Products
                 </h1>
-                <a href="type-products.html" class="product-view-all-btn">
+                <a href="{{url('/shop')}}" class="product-view-all-btn">
                     View All
                 </a>
             </div>
@@ -135,7 +135,7 @@
                 <h1 class="title">
                     New Arrival
                 </h1>
-                <a href="type-products.html" class="product-view-all-btn">
+                <a href="{{url('/shop')}}" class="product-view-all-btn">
                     View All
                 </a>
             </div>
@@ -185,7 +185,7 @@
                 <h1 class="title">
                     Regular Products
                 </h1>
-                <a href="type-products.html" class="product-view-all-btn">
+                <a href="{{url('/shop')}}" class="product-view-all-btn">
                     View All
                 </a>
             </div>
@@ -235,7 +235,7 @@
                 <h1 class="title">
                     Discount Products
                 </h1>
-                <a href="type-products.html" class="product-view-all-btn">
+                <a href="{{url('/shop')}}" class="product-view-all-btn">
                     View All
                 </a>
             </div>

@@ -46,6 +46,9 @@ Route::get('/search-products',               [HomeController::class, 'searchProd
 
 //Inner Pages (footer links)
 Route::get('/privacy-policy',                [HomeController::class, 'privacyPolicy']);
+Route::get('/terms-conditions',              [HomeController::class, 'termsConditions']);
+Route::get('/refund-policy',                 [HomeController::class, 'refundPolicy']);
+Route::get('/payment-policy',                [HomeController::class, 'paymentPolicy']);
 
 // Admin Routes
 Route::get('/login',                        [AdminController::class, 'adminLogin']);
@@ -99,8 +102,8 @@ Route::get('/admin/home-banner',                    [SettingController::class, '
 Route::post('/admin/home-banner/update',            [SettingController::class, 'updateHomeBanner']);
 Route::get('/admin/privacy-policy',                 [SettingController::class, 'showPrivacyPolicy']);
 Route::post('/admin/privacy-policy/update',         [SettingController::class, 'updatePrivacyPolicy']);
-Route::get('/admin/terms-condition',                [SettingController::class, 'showTermsCondition']);
-Route::post('/admin/terms-condition/update',        [SettingController::class, 'updateTermsCondition']);
+Route::get('/admin/terms-conditions',               [SettingController::class, 'showTermsConditions']);
+Route::post('/admin/terms-conditions/update',       [SettingController::class, 'updateTermsConditions']);
 Route::get('/admin/refund-policy',                  [SettingController::class, 'showRefundPolicy']);
 Route::post('/admin/refund-policy/update',          [SettingController::class, 'updateRefundPolicy']);
 Route::get('/admin/payment-policy',                 [SettingController::class, 'showPaymentPolicy']);

@@ -21,17 +21,17 @@
 									</a>
 								</li>
 								<li class="footer__list-item">
-									<a href="#" class="footer__list-item-link">
+									<a href="{{url('/terms-conditions')}}" class="footer__list-item-link">
 										Terms & Conditions
 									</a>
 								</li>
 								<li class="footer__list-item">
-									<a href="#" class="footer__list-item-link">
+									<a href="{{url('/refund-policy')}}" class="footer__list-item-link">
 										Refund Policy
 									</a>
 								</li>
 								<li class="footer__list-item">
-									<a href="#" class="footer__list-item-link">
+									<a href="{{url('/payment-policy')}}" class="footer__list-item-link">
 										Payment Policy
 									</a>
 								</li>
@@ -87,7 +87,7 @@
 										Contact Us
 									</a>
 								</li>
-								<li class="footer__list-item">
+								{{-- <li class="footer__list-item">
 									<a href="#" class="footer__list-item-link">
 										Blog
 									</a>
@@ -96,7 +96,7 @@
 									<a href="#" class="footer__list-item-link">
 										Careers
 									</a>
-								</li>
+								</li> --}}
 							</ul>
 						</div>
 					</div>

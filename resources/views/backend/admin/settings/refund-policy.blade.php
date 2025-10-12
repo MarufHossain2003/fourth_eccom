@@ -4,16 +4,16 @@
         <!-- general form elements -->
         <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title">Update Privacy Policy</h3>
+                <h3 class="card-title">Update Refund Policy</h3>
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form action="{{ url('/admin/privacy-policy/update') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url('/admin/refund-policy/update') }}" method="POST">
                 @csrf
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="privacyPolicy">Privacy Policy</label>
-                        <textarea id="summernote" name="privacyPolicy">{{ $privacyPolicy->description }}</textarea>
+                        <label for="refundPolicy">Refund Policy</label>
+                        <textarea id="summernote" name="refundPolicy">{{ $refundPolicy->description }}</textarea>
                     </div>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Update</button>

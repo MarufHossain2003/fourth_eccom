@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\CommonSetting;
 use App\Models\HomeBanner;
+use App\Models\PaymentPolicy;
 use App\Models\PrivacyPolicy;
+use App\Models\RefundPolicy;
+use App\Models\TermsConditions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -95,7 +98,7 @@ class SettingController extends Controller
         if(Auth::user()){
             if(Auth::user()->role == 1){
                 $privacyPolicy = PrivacyPolicy::first();
-                return view('backend.admin.privacy-policy', compact('privacyPolicy'));
+                return view('backend.admin.settings.privacy-policy', compact('privacyPolicy'));
             }
         }
     }
@@ -147,6 +150,75 @@ class SettingController extends Controller
                     return redirect()->back();
                 }
                 
+            }
+        }
+    }
+
+    public function showTermsConditions()
+    {
+        if(Auth::user()){
+            if(Auth::user()->role == 1){
+                $termsConditions = TermsConditions::first();
+                return view ('backend.admin.settings.terms-conditions', compact('termsConditions'));
+            }
+        }
+    }
+
+    public function updateTermsConditions(Request $request)
+    {
+        if(Auth::user()){
+            if(Auth::user()->role == 1){
+                $termsConditions = TermsConditions::first();
+                $termsConditions->description = $request->termsConditions;
+                $termsConditions->save();
+                toastr()->success('Terms and Conditions updated successfully!');
+                return redirect()->back();
+            }
+        }
+    }
+
+    public function showRefundPolicy()
+    {
+        if(Auth::user()){
+            if(Auth::user()->role == 1){
+                $refundPolicy = RefundPolicy::first();
+                return view ('backend.admin.settings.refund-policy', compact('refundPolicy'));
+            }
+        }
+    }
+
+    public function updateRefundPolicy(Request $request)
+    {
+        if(Auth::user()){
+            if(Auth::user()->role == 1){
+                $refundPolicy = RefundPolicy::first();
+                $refundPolicy->description = $request->refundPolicy;
+                $refundPolicy->save();
+                toastr()->success('Refund Policy updated successfully!');
+                return redirect()->back();
+            }
+        }
+    }
+
+    public function showPaymentPolicy()
+    {
+        if(Auth::user()){
+            if(Auth::user()->role == 1){
+                $paymentPolicy = PaymentPolicy::first();
+                return view ('backend.admin.settings.payment-policy', compact('paymentPolicy'));
+            }
+        }
+    }
+
+    public function updatePaymentPolicy(Request $request)
+    {
+        if(Auth::user()){
+            if(Auth::user()->role == 1){
+                $paymentPolicy = PaymentPolicy::first();
+                $paymentPolicy->description = $request->paymentPolicy;
+                $paymentPolicy->save();
+                toastr()->success('Payment Policy updated successfully!');
+                return redirect()->back();
             }
         }
     }

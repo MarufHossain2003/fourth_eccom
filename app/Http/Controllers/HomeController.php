@@ -10,7 +10,9 @@ use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\PrivacyPolicy;
 use App\Models\Product;
+use App\Models\RefundPolicy;
 use App\Models\SubCategory;
+use App\Models\TermsConditions;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -214,5 +216,23 @@ class HomeController extends Controller
     {
         $privacyPolicy = PrivacyPolicy::first();
         return view('frontend.home.privacy-policy', compact('privacyPolicy'));
+    }
+    
+    public function termsConditions()
+    {
+        $termsConditions = TermsConditions::first();
+        return view('frontend.home.terms-conditions', compact('termsConditions'));
+    }
+
+    public function refundPolicy()
+    {
+        $refundPolicy = RefundPolicy::first();
+        return view('frontend.home.refund-policy', compact('refundPolicy'));
+    }
+    
+    public function paymentPolicy()
+    {
+        $paymentPolicy = RefundPolicy::first();
+        return view('frontend.home.payment-policy', compact('paymentPolicy'));
     }
 }
