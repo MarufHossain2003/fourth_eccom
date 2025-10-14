@@ -27,6 +27,9 @@ class AdminController extends Controller
         if(Auth::attempt(['email'=>$email, 'password'=>$password, 'role'=> 2])){
             return redirect ('/dashboard');
         }
+        else{
+            return redirect('/login');
+        }
     }
 
     public function adminDashboard()
