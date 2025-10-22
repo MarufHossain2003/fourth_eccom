@@ -57,7 +57,7 @@
     </section>
     <!-- /Categoris Slider -->
     <!-- Banner -->
-    <section class="banner-section">
+    {{-- <section class="banner-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-sm-6">
@@ -77,7 +77,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- /Banner -->
     <!-- Popular Product -->
     <section class="product-section">
