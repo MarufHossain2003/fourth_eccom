@@ -37,6 +37,9 @@ Route::get('/product/addtocart/delete/{id}',                [HomeController::cla
 Route::post('/confirm-order',               [HomeController::class, 'confirmOrder']);
 Route::get('order-confirmed/{invoiceId}',   [HomeController::class, 'tahnkYouMessage']);
 
+// return product
+Route::post('/return-product',              [HomeController::class, 'returnProduct']);
+
 //Category Products
 Route::get('category-products/{slug}',       [HomeController::class, 'categoryProducts']);
 Route::get('sub-category-products/{slug}',   [HomeController::class, 'subCategoryProducts']);

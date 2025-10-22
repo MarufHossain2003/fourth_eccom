@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\OrderDetails;
+use App\Models\ReturnProduct;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,6 +17,12 @@ class Order extends Model
     {
         return $this->hasMany(OrderDetails::class, 'order_id', 'id')->with('product');
     }
+
+    public function returnProducts()
+    {
+        return $this->hasMany(ReturnProduct::class, 'order_id', 'id')->with('order');
+    }
 }
 
-// orderDetails has many to Order
+// order has many to orderDetails
+// order has many ReturnProduct

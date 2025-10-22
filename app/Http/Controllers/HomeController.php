@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderRequest;
+use App\Http\Requests\ReturnProducts;
 use App\Models\Cart;
 use App\Models\Category;
 use App\Models\HomeBanner;
@@ -14,6 +15,7 @@ use App\Models\RefundPolicy;
 use App\Models\SubCategory;
 use App\Models\TermsConditions;
 use Illuminate\Http\Request;
+use App\Models\ReturnProduct;
 
 class HomeController extends Controller
 {
@@ -234,5 +236,46 @@ class HomeController extends Controller
     {
         $paymentPolicy = RefundPolicy::first();
         return view('frontend.home.payment-policy', compact('paymentPolicy'));
+    }
+
+    public function returnProduct(Request $request)
+    {
+        $returnProduct = new ReturnProduct();
+        $returnProduct->c_name     = $request->c_name;
+        $returnProduct->c_phone    = $request->c_phone;
+        $returnProduct->address  = $request->address;
+        if ($request->filled('product_id')) {
+            if ($this->orderExists($request->product_id)) {
+                $returnProduct->product_id = $request->product_id;
+            } else {
+                toastr()->warning('Order not found.');
+                return redirect()->back();
+            }
+        }
+        $returnProduct->c_email    = $request->c_email;
+        $returnProduct->define_issue    = $request->define_issue;
+
+        if (isset($request->image)) {
+            $imageName = rand() . '-return-' . '.' . $request->image->extension();
+            $request->image->move('backend/images/return/', $imageName);
+            $returnProduct->image = $imageName;
+        }
+        $returnProduct->save();
+        toastr()->success('Return request submitted successfully!!');
+        return redirect()->back();
+    }
+
+
+    /**
+     * Check if an order exists by id or invoiceId.
+     *
+     * @param mixed $orderId
+     * @return bool
+     */
+    private function orderExists($orderId)
+    {
+        return is_numeric($orderId)
+            ? Order::where('id', $orderId)->exists()
+            : Order::where('invoiceId', $orderId)->exists();
     }
 }
