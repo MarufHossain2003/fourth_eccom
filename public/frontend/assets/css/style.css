@@ -37,7 +37,6 @@
     margin: 0 auto;
     overflow-x: hidden;
     font-family: 'Quicksand', sans-serif;
-    background-color: #c6eec2;
   }
   
   .categoris-slider-section {
@@ -1068,7 +1067,7 @@ margin-left: 10px;
       margin-left: 5px;
   }
   .offer-product-item-outer:hover {
-      webkit-transform: translateY(-5px);
+      -webkit-transform: translateY(-5px);
       transform: translateY(-5px);
       -webkit-transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
       transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);

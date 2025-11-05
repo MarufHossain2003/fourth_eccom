@@ -13,35 +13,35 @@
                             <div class="col-md-6">
                                 <div class="input-item-wrapper">
                                     <label for="c_name">Name</label>
-                                    <input type="text" name="c_name" value="" placeholder="Name*"
+                                    <input type="text" name="c_name" placeholder="Name*"
                                         class="form-control" required/>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="input-item-wrapper">
                                     <label for="c_phone">Phone</label>
-                                    <input type="number" name="c_phone" value="" placeholder="Phone*"
+                                    <input type="number" name="c_phone" placeholder="Phone*"
                                         class="form-control" required/>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="input-item-wrapper">
                                     <label for="address">Address</label>
-                                    <input type="text" name="address" value="" placeholder="Address*"
+                                    <input type="text" name="address" placeholder="Address*"
                                         class="form-control" required/>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="input-item-wrapper">
                                     <label for="product_id">Order Id</label>
-                                    <input type="text" name="product_id" value="" placeholder="Order Id*"
+                                    <input type="text" name="product_id" placeholder="Order Id*"
                                         class="form-control" required/>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="input-item-wrapper">
                                     <label for="c_email">Email Address</label>
-                                    <input type="email" name="c_email" value="" placeholder="Enter your email"
+                                    <input type="email" name="c_email" placeholder="Enter your email"
                                         class="form-control" required/>
                                 </div>
                             </div>
