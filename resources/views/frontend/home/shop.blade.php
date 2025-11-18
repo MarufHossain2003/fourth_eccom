@@ -68,6 +68,9 @@
                                         @if ($type == 'category')
                                             <span class="number">{{ $categoryProducts->count() }}</span>
                                         @endif
+                                        @if ($type == 'subCategory')
+                                          <span class="number">{{$subCategoryProducts->count()}}</span>  
+                                        @endif
                                     </h4>
                                 </div>
                             </div>
@@ -77,13 +80,13 @@
                                 <div class="col-lg-3 col-md-6 col-sm-6">
                                     <div class="product__item-outer">
                                         <div class="product__item-image-outer">
-                                            <a href="{{ url('/product-details/' . $product->slug) }}"
+                                            <a href="{{ url('product-details/' . $product->slug) }}"
                                                 class="product__item-image-inner">
                                                 <img src="{{ asset('backend/images/product/' . $product->image) }}"
                                                     alt="Product Image" />
                                             </a>
                                             <div class="product__item-add-cart-btn-outer">
-                                                <a href="{{ url('/product-details/' . $product->slug) }}"
+                                                <a href="{{ url('product-details/' . $product->slug) }}"
                                                     class="product__item-add-cart-btn-inner">
                                                     Add to Cart
                                                 </a>
@@ -95,7 +98,7 @@
                                             </div>
                                         </div>
                                         <div class="product__item-info-outer">
-                                            <a href="{{ url('/product-details/' . $product->slug) }}"
+                                            <a href="{{ url('product-details/' . $product->slug) }}"
                                                 class="product__item-name">
                                                 {{ $product->name }}
                                             </a>
@@ -118,13 +121,13 @@
                                 <div class="col-lg-3 col-md-6 col-sm-6">
                                     <div class="product__item-outer">
                                         <div class="product__item-image-outer">
-                                            <a href="{{ url('/product-details/' . $product->slug) }}"
+                                            <a href="{{ url('product-details/' . $product->slug) }}"
                                                 class="product__item-image-inner">
                                                 <img src="{{ asset('backend/images/product/' . $product->image) }}"
                                                     alt="Product Image" />
                                             </a>
                                             <div class="product__item-add-cart-btn-outer">
-                                                <a href="{{ url('/product-details/' . $product->slug) }}"
+                                                <a href="{{ url('product-details/' . $product->slug) }}"
                                                     class="product__item-add-cart-btn-inner">
                                                     Add to Cart
                                                 </a>
@@ -136,7 +139,7 @@
                                             </div>
                                         </div>
                                         <div class="product__item-info-outer">
-                                            <a href="{{ url('/product-details/' . $product->slug) }}"
+                                            <a href="{{ url('product-details/' . $product->slug) }}"
                                                 class="product__item-name">
                                                 {{ $product->name }}
                                             </a>
@@ -159,13 +162,13 @@
                                 <div class="col-lg-3 col-md-6 col-sm-6">
                                     <div class="product__item-outer">
                                         <div class="product__item-image-outer">
-                                            <a href="{{ url('/product-details/' . $product->slug) }}"
+                                            <a href="{{ url('product-details/' . $product->slug) }}"
                                                 class="product__item-image-inner">
                                                 <img src="{{ asset('backend/images/product/' . $product->image) }}"
                                                     alt="Product Image" />
                                             </a>
                                             <div class="product__item-add-cart-btn-outer">
-                                                <a href="{{ url('/product-details/' . $product->slug) }}"
+                                                <a href="{{ url('product-details/' . $product->slug) }}"
                                                     class="product__item-add-cart-btn-inner">
                                                     Add to Cart
                                                 </a>
@@ -177,7 +180,7 @@
                                             </div>
                                         </div>
                                         <div class="product__item-info-outer">
-                                            <a href="{{ url('/product-details/' . $product->slug) }}"
+                                            <a href="{{ url('product-details/' . $product->slug) }}"
                                                 class="product__item-name">
                                                 {{ $product->name }}
                                             </a>

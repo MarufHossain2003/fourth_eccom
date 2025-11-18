@@ -58,13 +58,17 @@ Route::get('/login',                        [AdminController::class, 'adminLogin
 Route::post('/login-check',                 [AdminController::class, 'loginAccess']);
 Route::get('/dashboard',                    [AdminController::class, 'adminDashboard']);
 
+
+Auth::routes(['register' => false]);
+
+
 // Category Routes
-Route::get('/admin/category/list',           [CategoryController::class, 'listCategory']);
-Route::get('/admin/category/create',         [CategoryController::class, 'createCategory']);
-Route::post('/admin/category/store',         [CategoryController::class, 'storeCategory']);
-Route::get('/admin/category/delete/{id}',    [CategoryController::class, 'deleteCategory']);
-Route::get('/admin/category/edit/{id}',      [CategoryController::class, 'editCategory']);
-Route::post('/admin/category/update/{id}',   [CategoryController::class, 'updateCategory']);
+Route::get('/admin/category/list',                  [CategoryController::class, 'listCategory']);
+Route::get('/admin/category/create',                [CategoryController::class, 'createCategory']);
+Route::post('/admin/category/store',                [CategoryController::class, 'storeCategory']);
+Route::get('/admin/category/delete/{id}',           [CategoryController::class, 'deleteCategory']);
+Route::get('/admin/category/edit/{id}',             [CategoryController::class, 'editCategory']);
+Route::post('/admin/category/update/{id}',          [CategoryController::class, 'updateCategory']);
 
 // Sub Category Routes
 Route::get('/admin/sub-category/list',              [SubCategoryController::class, 'listSubCategory']);
@@ -75,12 +79,12 @@ Route::get('/admin/sub-category/edit/{id}',         [SubCategoryController::clas
 Route::post('/admin/sub-category/update/{id}',      [SubCategoryController::class, 'updateSubCategory']);
 
 // Product Routes
-Route::get('/admin/product/list',              [ProductController::class, 'listProduct']);
-Route::get('/admin/product/create',            [ProductController::class, 'createProduct']);
-Route::post('/admin/product/store',            [ProductController::class, 'storeProduct']);
-Route::get('/admin/product/delete/{id}',       [ProductController::class, 'deleteProduct']);
-Route::get('/admin/product/edit/{id}',         [ProductController::class, 'editProduct']);
-Route::post('/admin/product/update/{id}',      [ProductController::class, 'updateProduct']);
+Route::get('/admin/product/list',                   [ProductController::class, 'listProduct']);
+Route::get('/admin/product/create',                 [ProductController::class, 'createProduct']);
+Route::post('/admin/product/store',                 [ProductController::class, 'storeProduct']);
+Route::get('/admin/product/delete/{id}',            [ProductController::class, 'deleteProduct']);
+Route::get('/admin/product/edit/{id}',              [ProductController::class, 'editProduct']);
+Route::post('/admin/product/update/{id}',           [ProductController::class, 'updateProduct']);
 
 // Order Routes
 Route::get('/admin/orders/edit/{id}',                       [OrderController::class, 'editOrders']);
@@ -113,9 +117,9 @@ Route::get('/admin/payment-policy',                 [SettingController::class, '
 Route::post('/admin/payment-policy/update',         [SettingController::class, 'updatePaymentPolicy']);
 
 // Authentication Routes
-Route::get('/admin/logout',                      [SettingController::class, 'adminLogout']);
-Route::get('/admin/credentials',                 [SettingController::class, 'adminCredentials']);
-Route::post('/admin/credentials/update',         [SettingController::class, 'adminCredentialsUpdate']);
+Route::get('/admin/logout',                         [SettingController::class, 'adminLogout']);
+Route::get('/admin/credentials',                    [SettingController::class, 'adminCredentials']);
+Route::post('/admin/credentials/update',            [SettingController::class, 'adminCredentialsUpdate']);
 
 // Empolyee Management
 Route::get('/admin/employee-list',                 [AdminController::class, 'employeeList']);

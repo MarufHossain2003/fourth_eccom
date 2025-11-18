@@ -165,6 +165,7 @@ class HomeController extends Controller
         $cartProducts = Cart::with('product')->where('ip_address', $request->ip())->get();
         if($cartProducts->isNotEmpty()){
             $order->save();
+            /** @var Cart $cart */
             foreach($cartProducts as $cart){
                 $orderDetails = new OrderDetails();
 

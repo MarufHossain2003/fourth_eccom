@@ -88,7 +88,7 @@
                                     </form>
                                     <button type="button" class="product-details-hot-line">
                                         <i class="fas fa-phone-alt"></i>
-                                        For Call : 0123456854
+                                        For Call : 01914610000
                                     </button>
                                 </div>
                             </div>
@@ -150,7 +150,7 @@
                                 </div>
                                 <div class="tab-pane fade" id="pills-policy" role="tabpanel"
                                     aria-labelledby="pills-policy-tab">
-                                    {{ $product->product_policy }}
+                                    {!! $product->product_policy !!}
                                 </div>
                             </div>
                         </div>
