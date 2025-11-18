@@ -58,8 +58,8 @@ Route::get('/login',                        [AdminController::class, 'adminLogin
 Route::post('/login-check',                 [AdminController::class, 'loginAccess']);
 Route::get('/dashboard',                    [AdminController::class, 'adminDashboard']);
 
-
-Auth::routes(['register' => false]);
+Auth::routes();
+// Auth::routes(['register' => false]);
 
 
 // Category Routes
