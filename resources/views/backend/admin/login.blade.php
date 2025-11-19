@@ -1,4 +1,3 @@
-<!-- filepath: c:\xampp\htdocs\fourth_eccom\resources\views\backend\admin\login.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>

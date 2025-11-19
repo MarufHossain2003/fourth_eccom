@@ -54,12 +54,12 @@ Route::get('/refund-policy',                 [HomeController::class, 'refundPoli
 Route::get('/payment-policy',                [HomeController::class, 'paymentPolicy']);
 
 // Admin Routes
-Route::get('/login',                        [AdminController::class, 'adminLogin']);
+Route::get('/admin/login',                  [AdminController::class, 'adminLogin']);
 Route::post('/login-check',                 [AdminController::class, 'loginAccess']);
 Route::get('/dashboard',                    [AdminController::class, 'adminDashboard']);
 
-Auth::routes();
-// Auth::routes(['register' => false]);
+// Disable public user registration routes for security and controlled onboarding.
+Auth::routes(['register' => false]);
 
 
 // Category Routes
