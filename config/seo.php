@@ -9,7 +9,7 @@ return [
     
     'site_name' => env('APP_NAME', 'Amar Jinish BD'),
     'site_description' => 'Premium e-commerce platform with quality products',
-    'site_url' => env('APP_URL', 'http://localhost'),
+    'site_url' => env('APP_URL', 'https://amarjinishbd.com'),
     'site_image' => '/images/og-default.png',
     
     /*
@@ -81,7 +81,7 @@ return [
         'organization' => [
             '@type' => 'Organization',
             'name' => env('APP_NAME', 'Amar Jinish BD'),
-            'url' => env('APP_URL', 'http://localhost'),
+            'url' => env('APP_URL', 'https://amarjinishbd.com'),
             'logo' => '/images/logo.png',
             'contactPoint' => [
                 '@type' => 'ContactPoint',

@@ -10,7 +10,7 @@
     <!-- SEO Meta Tags -->
 	{!! renderMetaTags() !!}
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Amar Jinish BD | Online Shop') }}</title>
 	@include('frontend.includes.style')
 
 </head>
