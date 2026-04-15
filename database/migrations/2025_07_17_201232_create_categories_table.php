@@ -15,7 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
-            $table->string('image');
+            $table->string('image')->nullable()->change();
+            $table->string('seo_title')->nullable()->after('name');
+            $table->text('seo_description')->nullable()->after('seo_title');
+            $table->string('seo_keywords')->nullable()->after('seo_description');
+            $table->string('canonical_url')->nullable()->after('seo_keywords');
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

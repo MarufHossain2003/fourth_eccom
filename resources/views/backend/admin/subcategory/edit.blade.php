@@ -27,6 +27,27 @@
                         <input type="text" class="form-control" id="name" value="{{$subCategory->name}}" name="name" placeholder="Enter name"
                             required>
                     </div>
+                    <div class="form-group">
+                        <label for="seo_title">SEO Title</label>
+                        <input type="text" class="form-control" id="seo_title" name="seo_title"
+                            value="{{ old('seo_title', $subCategory->seo_title ?? '') }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="seo_description">SEO Description</label>
+                        <textarea class="form-control" id="seo_description" name="seo_description" rows="3">{{ old('seo_description', $subCategory->seo_description ?? '') }}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="seo_keywords">SEO Keywords</label>
+                        <input type="text" class="form-control" id="seo_keywords" name="seo_keywords"
+                            value="{{ old('seo_keywords', $subCategory->seo_keywords ?? '') }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="canonical_url">Canonical URL</label>
+                        <input type="text" class="form-control" id="canonical_url" name="canonical_url"
+                            value="{{ old('canonical_url', $subCategory->canonical_url ?? '') }}">
+                    </div>
                 </div>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Submit</button>

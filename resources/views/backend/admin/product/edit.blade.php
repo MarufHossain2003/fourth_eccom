@@ -129,6 +129,34 @@
                                 class="img-fluid mt-3 ml-2" style="width: 200px; height: 200px;">
                         @endforeach
                     </div>
+                    <!-- SEO Fields -->
+                    <div class="form-group">
+                        <label for="seo_title">SEO Title <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="seo_title" name="seo_title"
+                            value="{{ old('seo_title', $product->seo_title ?? '') }}"
+                            placeholder="Recommended: 50-60 characters" maxlength="60">
+                        <small class="form-text text-muted">Leave blank to use product name</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="seo_description">SEO Description <span class="text-danger">*</span></label>
+                        <textarea class="form-control" id="seo_description" name="seo_description" rows="3"
+                            placeholder="Recommended: 120-160 characters" maxlength="160">{{ old('seo_description', $product->seo_description ?? '') }}</textarea>
+                        <small class="form-text text-muted">Leave blank to use product description</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="seo_keywords">SEO Keywords</label>
+                        <input type="text" class="form-control" id="seo_keywords" name="seo_keywords"
+                            value="{{ old('seo_keywords', $product->seo_keywords ?? '') }}"
+                            placeholder="Comma separated keywords">
+                        <small class="form-text text-muted">Example: cotton shirt, blue shirt, casual wear</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="canonical_url">Canonical URL</label>
+                        <input type="text" class="form-control" id="canonical_url" name="canonical_url"
+                            value="{{ old('canonical_url', $product->canonical_url ?? '') }}">
+                    </div>
                 </div>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Update</button>

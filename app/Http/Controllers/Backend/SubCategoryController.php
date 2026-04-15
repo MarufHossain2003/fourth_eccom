@@ -27,7 +27,7 @@ class SubCategoryController extends Controller
         if (Auth::user()) {
             if (Auth::user()->role == 1) {
                 $categories = Category::get();
-                return view ('backend.admin.subcategory.create', compact('categories'));
+                return view('backend.admin.subcategory.create', compact('categories'));
             }
         }
     }
@@ -40,6 +40,10 @@ class SubCategoryController extends Controller
                 $subCategory->cat_id = $request->cat_id;
                 $subCategory->name = $request->name;
                 $subCategory->slug = Str::slug($request->name);
+                $subCategory->seo_title = $request->seo_title;
+                $subCategory->seo_description = $request->seo_description;
+                $subCategory->seo_keywords = $request->seo_keywords;
+                $subCategory->canonical_url = $request->canonical_url;
 
                 $subCategory->save();
                 toastr()->success('Sub-Category created successfully!');
@@ -54,12 +58,12 @@ class SubCategoryController extends Controller
             if (Auth::user()->role == 1) {
                 $subCategory = SubCategory::find($id);
                 $categories = Category::get();
-                return view ('backend.admin.subcategory.edit', compact('subCategory', 'categories'));
+                return view('backend.admin.subcategory.edit', compact('subCategory', 'categories'));
             }
         }
     }
 
-    public function updateSubCategory(Request $request,$id)
+    public function updateSubCategory(Request $request, $id)
     {
         if (Auth::user()) {
             if (Auth::user()->role == 1) {
@@ -67,6 +71,10 @@ class SubCategoryController extends Controller
                 $subCategory->cat_id = $request->cat_id;
                 $subCategory->name = $request->name;
                 $subCategory->slug = Str::slug($request->name);
+                $subCategory->seo_title = $request->seo_title;
+                $subCategory->seo_description = $request->seo_description;
+                $subCategory->seo_keywords = $request->seo_keywords;
+                $subCategory->canonical_url = $request->canonical_url;
 
                 $subCategory->save();
                 toastr()->success('Sub-Category updated successfully!');
@@ -86,5 +94,32 @@ class SubCategoryController extends Controller
                 return redirect('/admin/sub-category/list');
             }
         }
+    }
+
+    // for SEO
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'seo_title' => 'nullable|string|max:60',
+            'seo_description' => 'nullable|string|max:160',
+            'seo_keywords' => 'nullable|string|max:255',
+        ]);
+
+        SubCategory::create($validated);
+        return redirect()->route('subcategories.index')->with('success', 'Sub-Category created successfully.');
+    }
+
+    public function update(Request $request, SubCategory $subCategory)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'seo_title' => 'nullable|string|max:60',
+            'seo_description' => 'nullable|string|max:160',
+            'seo_keywords' => 'nullable|string|max:255',
+        ]);
+
+        $subCategory->update($validated);
+        return redirect()->route('subcategories.index')->with('success', 'Sub-Category updated successfully.');
     }
 }

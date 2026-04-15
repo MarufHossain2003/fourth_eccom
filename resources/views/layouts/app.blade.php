@@ -7,6 +7,13 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <!-- SEO Meta Tags -->
+    {{-- 
+        Calls the renderMetaTags() helper to output SEO meta tags.
+        Ensure this helper is defined in app/Helpers or a similar location and loaded via composer.json or a service provider.
+    --}}
+    {!! renderMetaTags() !!}
+
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->
@@ -76,5 +83,8 @@
             @yield('content')
         </main>
     </div>
+
+    <!-- Structured Data -->
+    {!! renderStructuredData() !!}
 </body>
 </html>

@@ -61,6 +61,10 @@ class ProductController extends Controller
                 $product->short_desc = $request->short_desc;
                 $product->long_desc = $request->long_desc;
                 $product->product_policy = $request->product_policy;
+                $product->seo_title = $request->seo_title;
+                $product->seo_description = $request->seo_description;
+                $product->seo_keywords = $request->seo_keywords;
+                $product->canonical_url = $request->canonical_url;
 
                 $product->save();
 
@@ -143,6 +147,10 @@ class ProductController extends Controller
                 $product->short_desc = $request->short_desc;
                 $product->long_desc = $request->long_desc;
                 $product->product_policy = $request->product_policy;
+                $product->seo_title = $request->seo_title;
+                $product->seo_description = $request->seo_description;
+                $product->seo_keywords = $request->seo_keywords;
+                $product->canonical_url = $request->canonical_url;
 
                 $product->save();
 
@@ -233,5 +241,34 @@ class ProductController extends Controller
                 return redirect()->back();
             }
         }
+    }
+
+    // for SEO
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'seo_title' => 'nullable|string|max:60',
+            'seo_description' => 'nullable|string|max:160',
+            'seo_keywords' => 'nullable|string|max:255',
+        ]);
+
+        Product::create($validated);
+
+        return redirect()->route('products.index')->with('success', 'Product created successfully.');
+    }
+
+    public function update(Request $request, Product $product)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'seo_title' => 'nullable|string|max:60',
+            'seo_description' => 'nullable|string|max:160',
+            'seo_keywords' => 'nullable|string|max:255',
+        ]);
+
+        $product->update($validated);
+
+        return redirect()->route('products.index')->with('success', 'Product updated successfully.');
     }
 }

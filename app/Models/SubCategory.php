@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\HasSeoTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class SubCategory extends Model
 {
-    use HasFactory;
+    use HasFactory, HasSeoTrait;
 
     protected $guarded = [];
 

@@ -26,6 +26,9 @@ return new class extends Migration
             $table->longText('short_desc')->nullable();
             $table->longText('long_desc');
             $table->longText('product_policy')->nullable();
+            $table->string('seo_title')->nullable();
+            $table->text('seo_description')->nullable();
+            $table->string('seo_keywords')->nullable();
             $table->string('image');
             $table->timestamps();
         });

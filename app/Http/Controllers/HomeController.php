@@ -16,27 +16,38 @@ use App\Models\SubCategory;
 use App\Models\TermsConditions;
 use Illuminate\Http\Request;
 use App\Models\ReturnProduct;
+use App\Services\SeoService;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(SeoService $seo)
     {
         $hotProduct = Product::where('product_type', 'hot')->orderBy('id', 'desc')->get();
         $newProduct = Product::where('product_type', 'new')->orderBy('id', 'desc')->get();
         $regularProduct = Product::where('product_type', 'regular')->orderBy('id', 'desc')->get();
         $discountProduct = Product::where('product_type', 'discount')->orderBy('id', 'desc')->get();
         $homeBanner = HomeBanner::first();
+
+        $seo->setTitle(config('app.name', 'E-commerce Website'));
+        $seo->setDescription('Shop top products with secure checkout, fast delivery, and great prices.');
+
+        $seo->setStructuredData([
+            '@context' => 'https://schema.org',
+            '@type' => 'WebSite',
+            'name' => config('app.name'),
+            'url' => url('/'),
+        ]);
         return view('frontend.index', compact('hotProduct', 'newProduct', 'regularProduct', 'discountProduct', 'homeBanner'));
     }
 
     public function shopProducts(Request $request)
     {
-        if(isset($request->categoryId)){
+        if (isset($request->categoryId)) {
             $type = 'category';
             $categoryProducts = Category::where('id', $request->categoryId)->with('product')->first();
             return view('frontend.home.shop', compact('categoryProducts', 'type'));
         }
-        if(isset($request->subCategoryId)){
+        if (isset($request->subCategoryId)) {
             $type = 'subCategory';
             $subCategoryProducts = SubCategory::where('id', $request->subCategoryId)->with('product')->first();
             return view('frontend.home.shop', compact('subCategoryProducts', 'type'));
@@ -60,12 +71,27 @@ class HomeController extends Controller
         return view('frontend.home.checkout');
     }
 
-    public function productDetails($slug)
+    public function productDetails($slug, SeoService $seo)
     {
         $product = Product::where('slug', $slug)->with('color', 'size', 'galleryImage', 'category')->first();
         // dd($product);
         // $addtoCart = Cart::where('ip_address', request()->ip())->get();
         // dd($addtoCart);
+
+        // Set SEO from model
+        $seo->fromModel($product);
+
+        // Add structured data
+        $seo->setStructuredData([
+            '@context' => 'https://schema.org',
+            '@type' => 'Product',
+            'name' => $product->name,
+            'description' => $product->description,
+            'image' => $product->getOgImage(),
+            'priceCurrency' => 'BDT',
+            'price' => $product->price,
+        ]);
+
         return view('frontend.home.product-details', compact('product'));
     }
 
@@ -147,11 +173,11 @@ class HomeController extends Controller
         $order = new Order();
 
         $previousOrder = Order::orderBy('id', 'desc')->first();
-        if($previousOrder == null){
+        if ($previousOrder == null) {
             $order->invoiceId = 'AJBD-1';
         }
-        if($previousOrder != null){
-            $generateInvoiceId = 'AJBD-'.$previousOrder->id+1;
+        if ($previousOrder != null) {
+            $generateInvoiceId = 'AJBD-' . $previousOrder->id + 1;
             $order->invoiceId = $generateInvoiceId;
         }
         $order->c_name  = $request->c_name;
@@ -160,13 +186,13 @@ class HomeController extends Controller
         $order->address = $request->address;
         $order->area    = $request->area;
         $order->price   = $request->inputGrandTotal;
-        
+
         // Store Info into OrderDetails Table...
         $cartProducts = Cart::with('product')->where('ip_address', $request->ip())->get();
-        if($cartProducts->isNotEmpty()){
+        if ($cartProducts->isNotEmpty()) {
             $order->save();
             /** @var Cart $cart */
-            foreach($cartProducts as $cart){
+            foreach ($cartProducts as $cart) {
                 $orderDetails = new OrderDetails();
 
                 $orderDetails->order_id   = $order->id;
@@ -178,14 +204,13 @@ class HomeController extends Controller
                 $orderDetails->save();
                 $cart->delete();
             }
-        }
-        else{
+        } else {
             toastr()->warning('No product in cart!!');
             return redirect('/');
         }
 
         toastr()->success('Order Placed Successfully!!');
-        return redirect('order-confirmed/'.$generateInvoiceId);
+        return redirect('order-confirmed/' . $generateInvoiceId);
     }
 
     public function tahnkYouMessage($invoiceId)
@@ -193,24 +218,42 @@ class HomeController extends Controller
         return view('frontend.home.thankyou', compact('invoiceId'));
     }
 
-    public function categoryProducts($slug)
+    public function categoryProducts($slug, SeoService $seo)
     {
         $caegoryProducts = Category::where('slug', $slug)->with('product')->first();
         // dd($caegoryProducts);
+        $seo->fromModel($caegoryProducts);
+
+        $seo->setStructuredData([
+            '@context' => 'https://schema.org',
+            '@type' => 'CollectionPage',
+            'name' => $caegoryProducts->name,
+            'description' => $caegoryProducts->seo_description ?? '',
+        ]);
+
         return view('frontend.home.category-products', compact('caegoryProducts'));
     }
 
-    public function subCategoryProducts($slug)
+    public function subCategoryProducts($slug, SeoService $seo)
     {
         $subCategoryProducts = SubCategory::where('slug', $slug)->with('product')->first();
         // dd($subCategoryProducts);
+        $seo->fromModel($subCategoryProducts);
+
+        $seo->setStructuredData([
+            '@context' => 'https://schema.org',
+            '@type' => 'CollectionPage',
+            'name' => $subCategoryProducts->name,
+            'description' => $subCategoryProducts->seo_description ?? '',
+        ]);
+
         return view('frontend.home.sub-category-products', compact('subCategoryProducts'));
     }
 
     // Search Products
     public function searchProducts(Request $request)
     {
-        $products = Product::where('name', 'like', '%'.$request->search.'%')->get();
+        $products = Product::where('name', 'like', '%' . $request->search . '%')->get();
         return view('frontend.home.search-products', compact('products'));
     }
 
@@ -220,7 +263,7 @@ class HomeController extends Controller
         $privacyPolicy = PrivacyPolicy::first();
         return view('frontend.home.privacy-policy', compact('privacyPolicy'));
     }
-    
+
     public function termsConditions()
     {
         $termsConditions = TermsConditions::first();
@@ -232,7 +275,7 @@ class HomeController extends Controller
         $refundPolicy = RefundPolicy::first();
         return view('frontend.home.refund-policy', compact('refundPolicy'));
     }
-    
+
     public function paymentPolicy()
     {
         $paymentPolicy = RefundPolicy::first();
