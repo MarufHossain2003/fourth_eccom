@@ -14,6 +14,10 @@
                             <th>Sub-Category Name</th>
                             <th>Category</th>
                             <th>Action</th>
+                            <th>SEO Title</th>
+                            <th>SEO Description</th>
+                            <th>SEO Keywords</th>
+                            <th>Canonical URL</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -22,7 +26,10 @@
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $subCategory->name }}</td>
                                 <td>{{ $subCategory->category->name ?? 'No category' }}</td>
-
+                                <td>{{ $subCategory->seo_title }}</td>
+                                <td>{{ $subCategory->seo_description }}</td>
+                                <td>{{ $subCategory->seo_keywords }}</td>
+                                <td>{{ $subCategory->canonical_url }}</td>
                                 <td>
                                     <a href="{{ url('/admin/sub-category/edit/' . $subCategory->id) }}"
                                         class="btn btn-primary">Edit</a>

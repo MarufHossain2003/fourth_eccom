@@ -18,6 +18,10 @@
                             <th>Buy Price</th>
                             <th>Regular Price</th>
                             <th>Discount Price</th>
+                            <th>SEO Title</th>
+                            <th>SEO Description</th>
+                            <th>SEO Keywords</th>
+                            <th>Canonical URL</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -35,6 +39,10 @@
                                 <td>{{$product->buy_price}}</td>
                                 <td>{{$product->regular_price}}</td>
                                 <td>{{$product->discount_price}}</td>
+                                <td>{{$product->seo_title}}</td>
+                                <td>{{$product->seo_description}}</td>
+                                <td>{{$product->seo_keywords}}</td>
+                                <td>{{$product->canonical_url}}</td>
                                 <td>
                                     <a href="{{url('/admin/product/edit/'.$product->id)}}" class="btn btn-primary">Edit</a>
                                     <a href="{{url('/admin/product/delete/'.$product->id)}}" onclick="return confirm('Are you sure?')" class="btn btn-danger">Delete</a>

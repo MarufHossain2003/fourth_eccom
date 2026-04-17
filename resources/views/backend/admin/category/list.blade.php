@@ -13,6 +13,10 @@
                             <th>Sl</th>
                             <th>Image</th>
                             <th>Category Name</th>
+                            <th>SEO Title</th>
+                            <th>SEO Description</th>
+                            <th>SEO Keywords</th>
+                            <th>Canonical URL</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -25,6 +29,10 @@
                                         style="width: 100px; height: 100px;">
                                 </td>
                                 <td>{{$category->name}}</td>
+                                <td>{{$category->seo_title}}</td>
+                                <td>{{$category->seo_description}}</td>
+                                <td>{{$category->seo_keywords}}</td>
+                                <td>{{$category->canonical_url}}</td>
                                 <td>
                                     <a href="{{url('/admin/category/edit/'.$category->id)}}" class="btn btn-primary">Edit</a>
                                     <a href="{{url('/admin/category/delete/'.$category->id)}}" onclick="return confirm('Are you sure?')" class="btn btn-danger">Delete</a>
