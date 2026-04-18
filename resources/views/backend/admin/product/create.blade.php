@@ -119,14 +119,14 @@
                         <label for="seo_title">SEO Title <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="seo_title" name="seo_title"
                             value="{{ old('seo_title', $product->seo_title ?? '') }}"
-                            placeholder="Recommended: 50-60 characters" maxlength="60">
+                            placeholder="Recommended: 50-90 characters" maxlength="90">
                         <small class="form-text text-muted">Leave blank to use product name</small>
                     </div>
 
                     <div class="form-group">
                         <label for="seo_description">SEO Description <span class="text-danger">*</span></label>
                         <textarea class="form-control" id="seo_description" name="seo_description" rows="3"
-                            placeholder="Recommended: 120-160 characters" maxlength="160">{{ old('seo_description', $product->seo_description ?? '') }}</textarea>
+                            placeholder="Recommended: 150-200 characters" maxlength="200">{{ old('seo_description', $product->seo_description ?? '') }}</textarea>
                         <small class="form-text text-muted">Leave blank to use product description</small>
                     </div>
 
