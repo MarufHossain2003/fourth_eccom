@@ -2,7 +2,7 @@
 		<div class="footer__top-wrapper">
 			<div class="container">
 				<a href="{{url('/')}}" class="footer__brand-logo-outer">
-					<img src="{{asset('backend/images/settings/'.$frontendSettings->logo)}}" class="footer__brand-logo-inner" />
+					<img src="{{asset('backend/images/settings/'.$frontendSettings->logo)}}" class="footer__brand-logo-inner" alt="Logo"/>
 				</a>
 			</div>
 		</div>    
