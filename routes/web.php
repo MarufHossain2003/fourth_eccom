@@ -10,6 +10,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SeoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AiAgentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -132,3 +133,8 @@ Route::get('/admin/employee-create',                        [AdminController::cl
 Route::post('/admin/employee-store',                        [AdminController::class, 'employeeStore']);
 Route::get('/admin/employee-edit/{id}',                     [AdminController::class, 'employeeEdit']);
 Route::post('/admin/employee-update/{id}',                  [AdminController::class, 'employeeUpdate']);
+
+// AI Agent Route
+Route::post('/ai-agent/chat', [AiAgentController::class, 'chat'])
+    ->middleware('throttle:30,1')
+    ->name('ai.agent.chat');

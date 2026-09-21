@@ -24,6 +24,8 @@
 
 	<!-- Structured Data -->
 	{!! renderStructuredData() !!}
+
+	
 </body>
 </html>
 @stack('script')

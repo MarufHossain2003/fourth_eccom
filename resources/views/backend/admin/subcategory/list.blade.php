@@ -13,11 +13,11 @@
                             <th>Sl</th>
                             <th>Sub-Category Name</th>
                             <th>Category</th>
-                            <th>Action</th>
                             <th>SEO Title</th>
                             <th>SEO Description</th>
                             <th>SEO Keywords</th>
                             <th>Canonical URL</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
