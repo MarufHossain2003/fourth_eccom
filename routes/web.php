@@ -135,6 +135,6 @@ Route::get('/admin/employee-edit/{id}',                     [AdminController::cl
 Route::post('/admin/employee-update/{id}',                  [AdminController::class, 'employeeUpdate']);
 
 // AI Agent Route
-Route::post('/ai-agent/chat',                               [AiAgentController::class, 'chat']);
-    // ->middleware('throttle:30,1')
-    // ->name('ai.agent.chat');
+Route::post('/ai-agent/chat',                               [AiAgentController::class, 'chat'])
+    ->middleware('throttle:30,1')
+    ->name('ai.agent.chat');
